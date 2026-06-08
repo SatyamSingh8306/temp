@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Best Phones ₹10K–14K – June 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0d0f14;
+    --surface: #161920;
+    --card: #1c2029;
+    --border: #2a2f3d;
+    --accent: #f0b429;
+    --accent2: #3ecf8e;
+    --accent3: #60a5fa;
+    --warn: #f87171;
+    --text: #e8eaf0;
+    --muted: #8890a4;
+    --tag-bg: #252c3f;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  /* HEADER */
+  header {
+    background: linear-gradient(135deg, #131720 0%, #1a1f2e 50%, #0f1318 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 40px 24px 32px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  header::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 60% 50% at 50% 0%, rgba(240,180,41,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  header h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(22px, 5vw, 38px);
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    color: #fff;
+  }
+  header h1 span { color: var(--accent); }
+  header p {
+    margin-top: 8px;
+    color: var(--muted);
+    font-size: 13px;
+    font-weight: 300;
+  }
+  .update-badge {
+    display: inline-block;
+    margin-top: 14px;
+    background: rgba(240,180,41,0.12);
+    border: 1px solid rgba(240,180,41,0.3);
+    color: var(--accent);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border-radius: 20px;
+  }
+
+  /* FILTERS */
+  .filter-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 20px 24px;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+  .filter-btn {
+    background: var(--tag-bg);
+    border: 1px solid var(--border);
+    color: var(--muted);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    padding: 6px 14px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .filter-btn:hover, .filter-btn.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #000;
+  }
+
+  /* SECTION LABELS */
+  .section-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 24px 24px 12px;
+    font-family: 'Syne', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* GRID */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+    gap: 16px;
+    padding: 0 24px 32px;
+  }
+
+  /* CARD */
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+    position: relative;
+  }
+  .card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.4);
+  }
+  .card.top {
+    border-color: rgba(240,180,41,0.35);
+    box-shadow: 0 0 0 1px rgba(240,180,41,0.1);
+  }
+  .card.hidden { display: none; }
+
+  .card-header {
+    padding: 16px 18px 10px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+  }
+  .rank {
+    font-family: 'Syne', sans-serif;
+    font-size: 11px;
+    font-weight: 800;
+    color: var(--muted);
+    min-width: 28px;
+    padding-top: 3px;
+  }
+  .card.top .rank { color: var(--accent); }
+  .card-title-block { flex: 1; }
+  .card-name {
+    font-family: 'Syne', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.3;
+  }
+  .card-sub {
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 3px;
+  }
+
+  /* PRICE BLOCK */
+  .price-block {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+    text-align: right;
+  }
+  .price {
+    font-family: 'Syne', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--accent2);
+  }
+  .price.warn { color: var(--warn); }
+
+  /* PRICE WARNING BANNER */
+  .price-warn-banner {
+    margin: 0 18px 10px;
+    background: rgba(248,113,113,0.08);
+    border: 1px solid rgba(248,113,113,0.25);
+    border-radius: 8px;
+    padding: 7px 12px;
+    font-size: 11.5px;
+    color: var(--warn);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  /* SPECS GRID */
+  .specs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--border);
+    margin: 0 18px;
+    border-radius: 8px;
+    overflow: hidden;
+    font-size: 12px;
+  }
+  .spec {
+    background: var(--surface);
+    padding: 7px 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+  }
+  .spec-label { color: var(--muted); font-size: 10.5px; font-weight: 500; }
+  .spec-val { color: var(--text); font-weight: 500; }
+
+  /* TAGS */
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    padding: 12px 18px 8px;
+  }
+  .tag {
+    background: var(--tag-bg);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 3px 8px;
+    font-size: 11px;
+    color: var(--muted);
+  }
+  .tag.highlight {
+    background: rgba(62,207,142,0.1);
+    border-color: rgba(62,207,142,0.3);
+    color: var(--accent2);
+  }
+  .tag.perf {
+    background: rgba(96,165,250,0.1);
+    border-color: rgba(96,165,250,0.3);
+    color: var(--accent3);
+  }
+
+  /* WHY SECTION */
+  .why {
+    padding: 8px 18px 12px;
+    font-size: 12.5px;
+    color: var(--muted);
+    line-height: 1.5;
+    border-top: 1px solid var(--border);
+  }
+  .why strong { color: var(--accent); font-weight: 600; }
+
+  /* BUY BUTTONS */
+  .buy-row {
+    display: flex;
+    gap: 8px;
+    padding: 12px 18px 16px;
+    border-top: 1px solid var(--border);
+  }
+  .buy-btn {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 9px 12px;
+    border-radius: 8px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: opacity 0.2s, transform 0.15s;
+    cursor: pointer;
+  }
+  .buy-btn:hover { opacity: 0.85; transform: scale(0.98); }
+  .btn-flipkart {
+    background: #FFE01B;
+    color: #333;
+  }
+  .btn-amazon {
+    background: #FF9900;
+    color: #1a1a1a;
+  }
+  .btn-na {
+    background: var(--tag-bg);
+    color: var(--muted);
+    border: 1px solid var(--border);
+    cursor: default;
+    flex: 0;
+    font-size: 11px;
+  }
+  .btn-na:hover { opacity: 1; transform: none; }
+
+  /* TOP PICK RIBBON */
+  .top-ribbon {
+    position: absolute;
+    top: 0; right: 0;
+    background: var(--accent);
+    color: #000;
+    font-family: 'Syne', sans-serif;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    padding: 5px 12px 5px 20px;
+    clip-path: polygon(14px 0, 100% 0, 100% 100%, 0 100%);
+  }
+
+  /* ADVICE BOX */
+  .advice-box {
+    margin: 0 24px 40px;
+    background: var(--card);
+    border: 1px solid rgba(240,180,41,0.2);
+    border-radius: 14px;
+    padding: 20px 24px;
+  }
+  .advice-box h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--accent);
+    letter-spacing: 0.5px;
+    margin-bottom: 12px;
+    text-transform: uppercase;
+  }
+  .advice-box ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .advice-box li {
+    font-size: 13px;
+    color: var(--muted);
+    padding-left: 16px;
+    position: relative;
+    line-height: 1.5;
+  }
+  .advice-box li::before {
+    content: '→';
+    position: absolute; left: 0;
+    color: var(--accent);
+  }
+  .advice-box li strong { color: var(--text); }
+
+  footer {
+    text-align: center;
+    padding: 20px;
+    font-size: 11px;
+    color: var(--muted);
+    border-top: 1px solid var(--border);
+  }
+
+  @media (max-width: 600px) {
+    .grid { grid-template-columns: 1fr; padding: 0 12px 32px; }
+    .filter-bar { padding: 14px 12px; }
+    header { padding: 28px 16px 24px; }
+    .section-label, .advice-box { margin-left: 12px; margin-right: 12px; }
+    .advice-box { margin: 0 12px 32px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Best Phones <span>₹10K–14K</span> India</h1>
+  <p>6GB+ RAM · 128GB+ Storage · 5G · Ranked by Performance</p>
+  <div class="update-badge">Updated June 2026 · Prices Verified</div>
+</header>
+
+<div class="filter-bar">
+  <button class="filter-btn active" onclick="filterCards('all', this)">All (22)</button>
+  <button class="filter-btn" onclick="filterCards('top', this)">⭐ Top 5</button>
+  <button class="filter-btn" onclick="filterCards('in-range', this)">✅ Under ₹14K</button>
+  <button class="filter-btn" onclick="filterCards('gaming', this)">🎮 Gaming</button>
+  <button class="filter-btn" onclick="filterCards('camera', this)">📷 Camera</button>
+  <button class="filter-btn" onclick="filterCards('battery', this)">🔋 Battery</button>
+</div>
+
+<div id="cards-container">
+
+<!-- ── TOP PICKS ── -->
+<div class="section-label">⭐ Top Recommendations</div>
+<div class="grid" id="grid-top">
+
+  <!-- 1. POCO M7 Pro -->
+  <div class="card top" data-cats="top in-range gaming camera">
+    <div class="top-ribbon">Best Value</div>
+    <div class="card-header">
+      <div class="rank">#1</div>
+      <div class="card-title-block">
+        <div class="card-name">POCO M7 Pro 5G</div>
+        <div class="card-sub">6GB+128GB / 8GB+256GB</div>
+      </div>
+      <div class="price-block">
+        <div class="price">₹13,999</div>
+      </div>
+    </div>
+    <div class="specs">
+      <div class="spec"><span class="spec-label">Chipset</span><span class="spec-val">Dimensity 7025 Ultra</span></div>
+      <div class="spec"><span class="spec-label">Display</span><span class="spec-val">6.67" 120Hz AMOLED</span></div>
+      <div class="spec"><span class="spec-label">Camera</span><span class="spec-val">50MP Sony OIS + 20MP</span></div>
+      <div class="spec"><span class="spec-label">Battery</span><span class="spec-val">5110mAh / 45W</span></div>
+    </div>
+    <div class="tags">
+      <span class="tag highlight">Sony OIS Sensor</span>
+      <span class="tag perf">AnTuTu ~650K</span>
+      <span class="tag highlight">IP64 Rated</span>
+      <span class="tag">HyperOS</span>
+    </div>
+    <div class="why"><strong>Why #1:</strong> Best camera in range (50MP Sony LYT-600 with OIS), solid AMOLED, IP64 protection, and fits cleanly under ₹14K with bank offers. Base 6GB/128GB starts at ₹13,999.</div>
+    <div class="buy-row">
+      <a class="buy-btn btn-flipkart" href="https://www.flipkart.com/poco-m7-pro-5g/p/itmf76d7942d780f" target="_blank">🛒 Flipkart</a>
+      <span class="buy-btn btn-na">Amazon: N/A</span>
+    </div>
+  </div>
+
+  <!-- 2. iQOO Z10x -->
+  <div class="card top" data-cats="top in-range gaming">
+    <div class="card-header">
+      <div class="rank">#2</div>
+      <div class="card-title-block">
+        <div class="card-name">iQOO Z10x 5G</div>
+        <div class="card-sub">6GB+128GB / 8GB+128GB</div>
+      </div>
+      <div class="price-block">
+        <div class="price">₹12,999–14,998</div>
+      </div>
+    </div>
+    <div class="specs">
+      <div class="spec"><span class="spec-label">Chipset</span><span class="spec-val">Snapdragon 6s Gen 3</span></div>
+      <div class="spec"><span class="spec-label">Display</span><span class="spec-val">6.72" 120Hz LCD</span></div>
+      <div class="spec"><span class="spec-label">Camera</span><span class="spec-val">50MP main + 2MP</span></div>
+      <div class="spec"><span class="spec-label">Battery</span><span class="spec-val">6000mAh / 44W</span></div>
+    </div>
+    <div class="tags">
+      <span class="tag perf">Gaming Grade SoC</span>
+      <span class="tag highlight">6000mAh</span>
+      <span class="tag">Thermal Mgmt</span>
+    </div>
+    <div class="why"><strong>Why #2:</strong> Gaming-tuned chipset with aggressive thermal management, big battery, priced comfortably in range. Verified at ₹14,998 on Amazon.</div>
+    <div class="buy-row">
+      <a class="buy-btn btn-amazon" href="https://www.amazon.in/s?k=iQOO+Z10x+5G" target="_blank">🛒 Amazon</a>
+      <a class="buy-btn btn-flipkart" href="https://www.flipkart.com/search?q=iqoo+z10x+5g" target="_blank">🛒 Flipkart</a>
+    </div>
+  </div>
+
+  <!-- 3. Samsung Galaxy M17 5G -->
+  <div class="card top" data-cats="top in-range camera">
+    <div class="card-header">
+      <div class="rank">#3</div>
+      <div class="card-title-block">
+        <div class="card-name">Samsung Galaxy M17 5G</div>
+        <div class="card-sub">6GB+128GB</div>
+      </div>
+      <div class="price-block">
+        <div class="price">₹13,999–14,999</div>
+      </div>
+    </div>
+    <div class="specs">
+      <div class="spec"><span class="spec-label">Chipset</span><span class="spec-val">Exynos 1330</span></div>
+      <div class="spec"><span class="spec-label">Display</span><span class="spec-val">6.7" 120Hz Super AMOLED</span></div>
+      <div class="spec"><span class="spec-label">Camera</span><span class="spec-val">50MP main (OIS)</span></div>
+      <div class="spec"><span class="spec-label">Battery</span><span class="spec-val">6000mAh / 25W</span></div>
+    </div>
+    <div class="tags">
+      <span class="tag highlight">Best Camera Tuning</span>
+      <span class="tag highlight">6-yr Updates</span>
+      <span class="tag perf">Super AMOLED</span>
+      <span class="tag">IP54</span>
+    </div>
+    <div class="why"><strong>Why #3:</strong> Best camera colour science, Samsung's Super AMOLED display, 6 years OS+security updates, and IP54. MRP ₹14,999 — check bank offers to bring to ~₹13K.</div>
+    <div class="buy-row">
+      <a class="buy-btn btn-amazon" href="https://www.amazon.in/s?k=Samsung+Galaxy+M17+5G" target="_blank">🛒 Amazon</a>
+      <a class="buy-btn btn-flipkart" href="https://www.flipkart.com/search?q=samsung+galaxy+m17+5g" target="_blank">🛒 Flipkart</a>
+    </div>
+  </div>
+
+  <!-- 4. Redmi Note 14 SE 5G -->
+  <div class="card top" data-cats="top in-range camera">
+    <div class="card-header">
+      <div class="rank">#4</div>
+      <div class="card-title-block">
+        <div class="card-name">Redmi Note 14 SE 5G</div>
+        <div class="card-sub">6GB+128GB / 8GB+256GB</div>
+      </div>
+      <div class="price-block">
+        <div class="price">₹13,499–14,799</div>
+      </div>
+    </div>
+    <div class="specs">
+      <div class="spec"><span class="spec-label">Chipset</span><span class="spec-val">Dimensity 7025</span></div>
+      <div class="spec"><span class="spec-label">Display</span><span class="spec-val">6.67" 120Hz AMOLED</span></div>
+      <div class="spec"><span class="spec-label">Camera</span><span class="spec-val">50MP AI Camera</span></div>
+      <div class="spec"><span class="spec-label">Battery</span><span class="spec-val">5000mAh / 33W</span></div>
+    </div>
+    <div class="tags">
+      <span class="tag highlight">AMOLED Display</span>
+      <span class="tag perf">HyperOS</span>
+      <span class="tag">50MP AI</span>
+    </div>
+    <div class="why"><strong>Why #4:</strong> AMOLED screen at sub-₹15K, solid Dimensity chip, and great everyday performance. Priced nicely in range at ₹13,499–14,799.</div>
+    <div class="buy-row">
+      <a class="buy-btn btn-amazon" href="https://www.amazon.in/s?k=Redmi+Note+14+SE+5G" target="_blank">🛒 Amazon</a>
+      <a class="buy-btn btn-flipkart" href="https://www.flipkart.com/search?q=redmi+note+14+se+5g" target="_blank">🛒 Flipkart</a>
+    </div>
+  </div>
+
+  <!-- 5. Tecno Pova 7 5G (now above 14K) -->
+  <div class="card top" data-cats="top gaming">
+    <div class="card-header">
+      <div class="rank">#5</div>
+      <div class="card-title-block">
+        <div class="card-name">Tecno Pova 7 5G</div>
+        <div class="card-sub">8GB+128GB / 8GB+256GB</div>
+      </div>
+      <div class="price-block">
+        <div class="price warn">₹14,999 ⚠️</div>
+      </div>
+    </div>
+    <div class="price-warn-banner">⚠️ Currently ₹14,999 on Flipkart — slightly above ₹14K range. Watch for bank offers (can drop to ~₹12,499).</div>
+    <div class="specs">
+      <div class="spec"><span class="spec-label">Chipset</span><span class="spec-val">Dimensity 7300 Ultimate</span></div>
+      <div class="spec"><span class="spec-label">Display</span><span class="spec-val">6.78" 144Hz IPS</span></div>
+      <div class="spec"><span class="spec-label">Camera</span><span class="spec-val">50MP main + 8MP front</span></div>
+      <div class="spec"><span class="spec-label">Battery</span><span class="spec-val">6000mAh / 45W</span></div>
+    </div>
+    <div class="tags">
+      <span class="tag perf">AnTuTu ~850K</span>
+      <span class="tag highlight">144Hz Display</span>
+      <span class="tag">Android 15</span>
+      <span class="tag">Stereo Speakers</span>
+    </div>
+    <div class="why"><strong>Why #5:</strong> Highest AnTuTu scores in segment, excellent for gaming & multitasking. MRP is ₹14,999 but drops to ~₹12,499 on sale.</div>
+    <div class="buy-row">
+      <a class="buy-btn btn-flipkart" href="https://www.flipkart.com/search?q=tecno+pova+7+5g" target="_blank">🛒 Flipkart</a>
+      <a class="buy-btn btn-amazon" href="https://www.amazon.in/s?k=Tecno+Pova+7+5G" target="_blank">🛒 Amazon</a>
+    </div>
+  </div>
+
+</div><!-- /grid-top -->
+
+<!-- ── STRONG MID-TIER ── -->
+<div class="section-label">Strong Mid-Tier Options</div>
+<div class="grid" id="grid-mid">
+
+  <!-- 6. realme P3 5G (now above range) -->
+  <div class="card" data-cats="gaming camera">
+    <div class="card-header">
+      <div class="rank">#6</div>
+      <div class="card-title-block">
+        <div class="card-name">realme P3 5G</div>
+        <div class="card-sub">6GB/8GB + 128/256GB</div>
+      </div>
+      <div class="price-block">
+        <div class="price warn">₹15,999 ⚠️</div>
+      </div>
+    </div>
+    <div class="price-warn-banner">⚠️ Currently ₹15,999 on Flipkart — above ₹14K. Bank discounts may bring it near ₹14,999.</div>
+    <div class="specs">
+      <div class="spec"><span class="spec-label">Chipset</span><span class="spec-val">Snapdragon 6 Gen 4</span></div>
+      <div class="spec"><span class="spec-label">Display</span><span class="spec-val">6.67" 120Hz AMOLED</span></div>
+      <div class="spec"><span class="spec-label">Camera</span><span class="spec-val">50MP + 2MP, 16MP front</span></div>
+      <div class="spec"><span class="spec-label">Battery</span><span class="spec-val">6000mAh / 45W</span></div>
+    </div>
+    <div class="tags">
+      <span class="tag perf">AnTuTu ~760K</span>
+      <span class="tag highlight">IP69 Rated</span>
+      <span class="tag">SD 6 Gen 4</span>
+    </div>
+    <div class="why"><strong>Note:</strong> Excellent phone — IP69, powerful Snapdragon chip, AMOLED. Just slightly over budget at current price.</div>
+    <div class="buy-row">
+      <a class="buy-btn btn-flipkart" href="https://www.flipkart.com/search?q=realme+P3+5G" target="_blank">🛒 Flipkart</a>
+      <a class="buy-btn btn-amazon" href="https://www.amazon.in/s?k=realme+P3+5G" target="_blank">🛒 Amazon</a>
+    </div>
+  </div>
+
+  <!-- 7. vivo T4x 5G (above range) -->
+  <div class="card" data-cats="battery gaming">
+    <div class="card-header">
+      <div class="rank">#7</div>
+      <div class="card-title-block">
+        <div class="card-name">vivo T4x 5G</div>
+        <div class="card-sub">6GB+128GB</div>
+      </div>
+      <div class="price-block">
+        <div class="price warn">₹16,999 ⚠️</div>
+      </div>
+    </div>
+    <div class="price-warn-banner">⚠️ Currently ₹16,999 — outside ₹14K range. Only consider with significant bank/exchange offers.</div>
+    <div class="specs">
+      <div class="spec"><span class="spec-label">Chipset</span><span class="spec-val">Dimensity 7300</span></div>
+      <div class="spec"><span class="spec-label">Display</span><span class="spec-val">6.72" 120Hz LCD</span></div>
+      <div class="spec"><span class="spec-label">Camera</span><span class="spec-val">50MP main</span></div>
+      <div class="spec"><span class="spec-label">Battery</span><span class="spec-val">6500mAh / 44W</span></div>
+    </div>
+    <div class="tags">
+      <span class="tag highlight">6500mAh Giant</span>
+      <span class="tag perf">Dimensity 7300</span>
+    </div>
+    <div class="why"><strong>Best battery:</strong> 6500mAh is the largest in segment, but currently over budget. Worth watching for deals.</div>
+    <div class="buy-row">
+      <a class="buy-btn btn-flipkart" href="https://www.flipkart.com/search?q=vivo+T4x+5G" target="_blank">🛒 Flipkart</a>
+      <a class="buy-btn btn-amazon" href="https://www.amazon.in/s?k=vivo+T4x+5G" target="_blank">🛒 Amazon</a>
+    </div>
+  </div>
+
+  <!-- 8. OPPO K14x 5G (above range) -->
+  <div class="card" data-cats="battery">
+    <div class="card-header">
+      <div class="rank">#8</div>
+      <div class="card-title-block">
+        <div class="card-name">OPPO K14x 5G</div>
+        <div class="card-sub">6GB+128GB (Note: 4GB base)</div>
+      </div>
+      <div class="price-block">
+        <div class="price warn">₹14,749–16,600 ⚠️</div>
+      </div>
+    </div>
+    <div class="price-warn-banner">⚠️ Base 4GB variant at ₹14,749; 6GB+ starts higher. Verify RAM before buying — ensure 6GB variant.</div>
+    <div class="specs">
+      <div class="spec"><span class="spec-label">Chipset</span><span class="spec-val">Dimensity 6300</span></div>
+      <div class="spec"><span class="spec-label">Display</span><span class="spec-val">6.75" 120Hz LCD</span></div>
+      <div class="spec"><span class="spec-label">Camera</span><span class="spec-val">50MP + 2MP, 5MP front</span></div>
+      <div class="spec"><span class="spec-label">Battery</span><span class="spec-val">6500mAh / 45W</span></div>
+    </div>
+    <div class="tags">
+      <span class="tag highlight">6500mAh</span>
+      <span class="tag">IP64</span>
+      <span class="tag">45W Charging</span>
+    </div>
+    <div class="why"><strong>Caution:</strong> Base model only has 4GB RAM — confirm 6GB variant. Good battery/charging combo but weaker chip than alternatives.</div>
+    <div class="buy-row">
+      <a class="buy-btn btn-amazon" href="https://www.amazon.in/s?k=OPPO+K14x+5G+6GB" target="_blank">🛒 Amazon</a>
+      <a class="buy-btn btn-flipkart" href="https://www.flipkart.com/search?q=oppo+k14x+5g" target="_blank">🛒 Flipkart</a>
+    </div>
+  </div>
+
+  <!-- 9. Moto G57 Power (above range) -->
+  <div class="card" data-cats="battery camera">
+    <div class="card-header">
+      <div class="rank">#9</div>
+      <div class="card-title-block">
+        <div class="card-name">Motorola Moto G57 Power 5G</div>
+        <div class="card-sub">8GB+128GB</div>
+      </div>
+      <div class="price-block">
+        <div class="price warn">₹17,890 ⚠️</div>
+      </div>
+    </div>
+    <div class="price-warn-banner">⚠️ Currently ₹17,890 — significantly above ₹14K. Consider Moto G37 5G instead which is in range.</div>
+    <div class="specs">
+      <div class="spec"><span class="spec-label">Chipset</span><span class="spec-val">Snapdragon 6s Gen 3</span></div>
+      <div class="spec"><span class="spec-label">Display</span><span class="spec-val">6.7" 120Hz LCD</span></div>
+      <div class="spec"><span class="spec-label">Camera</span><span class="spec-val">50MP + Ultrawide</span></div>
+      <div class="spec"><span class="spec-label">Battery</span><span class="spec-val">6000+mAh / 45W</span></div>
+    </div>
+    <div class="tags">
+      <span class="tag perf">Near-Stock Android</span>
+      <span class="tag highlight">Ultrawide Cam</span>
+      <span class="tag">Clean Software</span>
+    </div>
+    <div class="why"><strong>Note:</strong> Great clean software + ultrawide camera, but has drifted above budget. Watch for sales or consider Moto G37 5G.</div>
+    <div class="buy-row">
+      <a class="buy-btn btn-amazon" href="https://www.amazon.in/s?k=Motorola+Moto+G57+Power+5G" target="_blank">🛒 Amazon</a>
+      <a class="buy-btn btn-flipkart" href="https://www.flipkart.com/search?q=moto+g57+power+5g" target="_blank">🛒 Flipkart</a>
+    </div>
+  </div>
+
+  <!-- 10. iQOO Z9x 5G -->
+  <div class="card" data-cats="in-range gaming battery">
+    <div class="card-header">
+      <div class="rank">#10</div>
+      <div class="card-title-block">
+        <div class="card-name">iQOO Z9x 5G</div>
+        <div class="card-sub">6GB/8GB + 128GB</div>
+      </div>
+      <div class="price-block">
+        <div class="price">₹11,999–13,999</div>
+      </div>
+    </div>
+    <div class="specs">
+      <div class="spec"><span class="spec-label">Chipset</span><span class="spec-val">Snapdragon 6 Gen 1</span></div>
+      <div class="spec"><span class="spec-label">Display</span><span class="spec-val">6.72" 120Hz IPS</span></div>
+      <div class="spec"><span class="spec-label">Camera</span><span class="spec-val">50MP main</span></div>
+      <div class="spec"><span class="spec-label">Battery</span><span class="spec-val">6000mAh / 44W</span></div>
+    </div>
+    <div class="tags">
+      <span class="tag perf">Gaming Focus</span>
+      <span class="tag highlight">6000mAh</span>
+    </div>
+    <div class="why">Gaming-optimized with a reliable Snapdragon chip, big battery, and strong charging. Comfortably in budget.</div>
+    <div class="buy-row">
+      <a class="buy-btn btn-amazon" href="https://www.amazon.in/s?k=iQOO+Z9x+5G" target="_blank">🛒 Amazon</a>
+      <a class="buy-btn btn-flipkart" href="https://www.flipkart.com/search?q=iqoo+z9x+5g" target="_blank">🛒 Flipkart</a>
+    </div>
+  </div>
+
+</div><!-- /grid-mid -->
+
+<!-- ── GOOD ALTERNATIVES ── -->
+<div class="section-label">Good Balanced / Alternative Options</div>
+<div class="grid" id="grid-alt">
+
+  <!-- 11–22: condensed cards -->
+  <div class="card" data-cats="in-range camera">
+    <div class="card-header">
+      <div class="rank">#11</div>
+      <div class="card-title-block"><div class="card-name">realme C83 5G / Narzo</div><div class="card-sub">6/8GB + 128GB</div></div>
+      <div class="price-block"><div class="price">₹10,999–13,499</div></div>
+    </div>
+    <div class="tags"><span class="tag">Snapdragon/Dimensity</span><span class="tag highlight">45W Charging</span><span class="tag">120Hz</span></div>
+    <div class="buy-row">
+      <a class="buy-btn btn-flipkart" href="https://www.flipkart.com/search?q=realme+C83+5G" target="_blank">🛒 Flipkart</a>
+      <a class="buy-btn btn-amazon" href="https://www.amazon.in/s?k=realme+narzo+5G+128GB" target="_blank">🛒 Amazon</a>
+    </div>
+  </div>
+
+  <div class="card" data-cats="in-range">
+    <div class="card-header">
+      <div class="rank">#12</div>
+      <div class="card-title-block"><div class="card-name">POCO C85 5G</div><div class="card-sub">6GB + 128GB</div></div>
+      <div class="price-block"><div class="price">₹11,499–13,890</div></div>
+    </div>
+    <div class="tags"><span class="tag">Solid Processor</span><span class="tag highlight">50MP Camera</span><span class="tag">Good Battery</span></div>
+    <div class="buy-row">
+      <a class="buy-btn btn-flipkart" href="https://www.flipkart.com/search?q=poco+c85+5g" target="_blank">🛒 Flipkart</a>
+      <a class="buy-btn btn-amazon" href="https://www.amazon.in/s?k=poco+c85+5g" target="_blank">🛒 Amazon</a>
+    </div>
+  </div>
+
+  <div class="card" data-cats="in-range battery">
+    <div class="card-header">
+      <div class="rank">#13</div>
+      <div class="card-title-block"><div class="card-name">Infinix Note 50X / Hot 50</div><div class="card-sub">8GB + 128GB</div></div>
+      <div class="price-block"><div class="price">₹11,999–13,999</div></div>
+    </div>
+    <div class="tags"><span class="tag highlight">45W+ Fast Charge</span><span class="tag perf">Big Battery</span><span class="tag">50MP+</span></div>
+    <div class="buy-row">
+      <a class="buy-btn btn-flipkart" href="https://www.flipkart.com/search?q=infinix+note+50x" target="_blank">🛒 Flipkart</a>
+      <a class="buy-btn btn-amazon" href="https://www.amazon.in/s?k=infinix+note+50x+5G" target="_blank">🛒 Amazon</a>
+    </div>
+  </div>
+
+  <div class="card" data-cats="in-range camera">
+    <div class="card-header">
+      <div class="rank">#14</div>
+      <div class="card-title-block"><div class="card-name">Samsung Galaxy A07 5G</div><div class="card-sub">6GB + 128GB</div></div>
+      <div class="price-block"><div class="price">₹11,499–13,499</div></div>
+    </div>
+    <div class="tags"><span class="tag highlight">Samsung Updates</span><span class="tag">6000mAh</span><span class="tag">Reliable Camera</span></div>
+    <div class="buy-row">
+      <a class="buy-btn btn-amazon" href="https://www.amazon.in/s?k=Samsung+Galaxy+A07+5G" target="_blank">🛒 Amazon</a>
+      <a class="buy-btn btn-flipkart" href="https://www.flipkart.com/search?q=samsung+galaxy+a07+5g" target="_blank">🛒 Flipkart</a>
+    </div>
+  </div>
+
+  <div class="card" data-cats="in-range camera">
+    <div class="card-header">
+      <div class="rank">#15</div>
+      <div class="card-title-block"><div class="card-name">Moto G37 5G</div><div class="card-sub">6/8GB + 128GB</div></div>
+      <div class="price-block"><div class="price">₹10,999–12,999</div></div>
+    </div>
+    <div class="tags"><span class="tag perf">Near-Stock Android</span><span class="tag highlight">50MP</span><span class="tag">120Hz</span></div>
+    <div class="buy-row">
+      <a class="buy-btn btn-amazon" href="https://www.amazon.in/s?k=Motorola+Moto+G37+5G" target="_blank">🛒 Amazon</a>
+      <a class="buy-btn btn-flipkart" href="https://www.flipkart.com/search?q=moto+g37+5g" target="_blank">🛒 Flipkart</a>
+    </div>
+  </div>
+
+  <div class="card" data-cats="in-range">
+    <div class="card-header">
+      <div class="rank">#16</div>
+      <div class="card-title-block"><div class="card-name">Redmi 13 5G / 15C 5G</div><div class="card-sub">6GB + 128GB</div></div>
+      <div class="price-block"><div class="price">₹10,999–13,499</div></div>
+    </div>
+    <div class="tags"><span class="tag">HyperOS</span><span class="tag">50MP</span><span class="tag highlight">Good Display</span></div>
+    <div class="buy-row">
+      <a class="buy-btn btn-amazon" href="https://www.amazon.in/s?k=Redmi+15C+5G" target="_blank">🛒 Amazon</a>
+      <a class="buy-btn btn-flipkart" href="https://www.flipkart.com/search?q=redmi+13+5g+6gb" target="_blank">🛒 Flipkart</a>
+    </div>
+  </div>
+
+  <div class="card" data-cats="in-range battery">
+    <div class="card-header">
+      <div class="rank">#17</div>
+      <div class="card-title-block"><div class="card-name">vivo Y19s 5G / Y11 5G</div><div class="card-sub">6GB + 128GB</div></div>
+      <div class="price-block"><div class="price">₹11,499–13,499</div></div>
+    </div>
+    <div class="tags"><span class="tag">Dimensity</span><span class="tag highlight">Large Battery</span><span class="tag">50MP</span></div>
+    <div class="buy-row">
+      <a class="buy-btn btn-amazon" href="https://www.amazon.in/s?k=vivo+Y19s+5G" target="_blank">🛒 Amazon</a>
+      <a class="buy-btn btn-flipkart" href="https://www.flipkart.com/search?q=vivo+y11+5g" target="_blank">🛒 Flipkart</a>
+    </div>
+  </div>
+
+  <div class="card" data-cats="in-range camera battery">
+    <div class="card-header">
+      <div class="rank">#18</div>
+      <div class="card-title-block"><div class="card-name">OPPO A6x 5G</div><div class="card-sub">6/8GB + 128GB</div></div>
+      <div class="price-block"><div class="price">₹11,999–13,999</div></div>
+    </div>
+    <div class="tags"><span class="tag highlight">45W Charging</span><span class="tag">Good Camera</span><span class="tag">Balanced</span></div>
+    <div class="buy-row">
+      <a class="buy-btn btn-amazon" href="https://www.amazon.in/s?k=OPPO+A6x+5G" target="_blank">🛒 Amazon</a>
+      <a class="buy-btn btn-flipkart" href="https://www.flipkart.com/search?q=oppo+a6x+5g" target="_blank">🛒 Flipkart</a>
+    </div>
+  </div>
+
+  <div class="card" data-cats="in-range">
+    <div class="card-header">
+      <div class="rank">#19</div>
+      <div class="card-title-block"><div class="card-name">Tecno Spark 30 5G</div><div class="card-sub">8GB + 128GB</div></div>
+      <div class="price-block"><div class="price">₹10,999–13,499</div></div>
+    </div>
+    <div class="tags"><span class="tag">Vibrant Display</span><span class="tag highlight">Fast Charging</span><span class="tag">8GB RAM</span></div>
+    <div class="buy-row">
+      <a class="buy-btn btn-amazon" href="https://www.amazon.in/s?k=Tecno+Spark+30+5G" target="_blank">🛒 Amazon</a>
+      <a class="buy-btn btn-flipkart" href="https://www.flipkart.com/search?q=tecno+spark+30+5g" target="_blank">🛒 Flipkart</a>
+    </div>
+  </div>
+
+  <div class="card" data-cats="in-range camera">
+    <div class="card-header">
+      <div class="rank">#20</div>
+      <div class="card-title-block"><div class="card-name">CMF by Nothing Phone 1</div><div class="card-sub">6/8GB + 128GB</div></div>
+      <div class="price-block"><div class="price">₹12,999–14,000</div></div>
+    </div>
+    <div class="tags"><span class="tag perf">Clean Nothing OS</span><span class="tag highlight">Unique Design</span><span class="tag">50MP</span></div>
+    <div class="buy-row">
+      <a class="buy-btn btn-amazon" href="https://www.amazon.in/s?k=CMF+Phone+1+5G" target="_blank">🛒 Amazon</a>
+      <a class="buy-btn btn-flipkart" href="https://www.flipkart.com/search?q=cmf+phone+1" target="_blank">🛒 Flipkart</a>
+    </div>
+  </div>
+
+  <div class="card" data-cats="in-range">
+    <div class="card-header">
+      <div class="rank">#21</div>
+      <div class="card-title-block"><div class="card-name">Lava Shark 2 5G</div><div class="card-sub">6/8GB + 128GB</div></div>
+      <div class="price-block"><div class="price">₹10,999–12,999</div></div>
+    </div>
+    <div class="tags"><span class="tag">Indian Brand</span><span class="tag highlight">Clean Software</span><span class="tag">50MP</span></div>
+    <div class="buy-row">
+      <a class="buy-btn btn-amazon" href="https://www.amazon.in/s?k=Lava+Shark+2+5G" target="_blank">🛒 Amazon</a>
+      <a class="buy-btn btn-flipkart" href="https://www.flipkart.com/search?q=lava+shark+2+5g" target="_blank">🛒 Flipkart</a>
+    </div>
+  </div>
+
+  <div class="card" data-cats="in-range camera">
+    <div class="card-header">
+      <div class="rank">#22</div>
+      <div class="card-title-block"><div class="card-name">Lava Blaze AMOLED 2</div><div class="card-sub">6/8GB + 128GB</div></div>
+      <div class="price-block"><div class="price">₹10,999–13,499</div></div>
+    </div>
+    <div class="tags"><span class="tag perf">AMOLED Display</span><span class="tag highlight">Indian Brand</span><span class="tag">50MP</span></div>
+    <div class="buy-row">
+      <a class="buy-btn btn-amazon" href="https://www.amazon.in/s?k=Lava+Blaze+AMOLED+2" target="_blank">🛒 Amazon</a>
+      <a class="buy-btn btn-flipkart" href="https://www.flipkart.com/search?q=lava+blaze+amoled+2" target="_blank">🛒 Flipkart</a>
+    </div>
+  </div>
+
+</div><!-- /grid-alt -->
+
+<!-- ADVICE BOX -->
+<div class="advice-box">
+  <h3>💡 Quick Buy Advice – June 2026</h3>
+  <ul>
+    <li><strong>Best buy right now under ₹14K:</strong> POCO M7 Pro 5G (₹13,999 on Flipkart) — Sony OIS camera, AMOLED, IP64. Hard to beat.</li>
+    <li><strong>Best for gaming:</strong> iQOO Z10x (₹14,998) or Tecno Pova 7 on sale — both have strong thermal performance.</li>
+    <li><strong>Best camera & longevity:</strong> Samsung Galaxy M17 5G — 6 years updates, Super AMOLED, best colour tuning.</li>
+    <li><strong>Price drift warning:</strong> realme P3 (₹15,999), Moto G57 (₹17,890), vivo T4x (₹16,999) have all moved above ₹14K — wait for a sale or use exchange offers.</li>
+    <li><strong>Bank offer tip:</strong> SBI/HDFC/ICICI bank cards often give ₹1,000–2,000 instant off on Flipkart & Amazon — check at checkout.</li>
+    <li><strong>Always prefer 8GB RAM</strong> variant for longevity, even if it costs ₹1–2K more. Avoid 4GB variants entirely.</li>
+  </ul>
+</div>
+
+</div><!-- /cards-container -->
+
+<footer>Prices verified June 2026 from 91mobiles, Smartprix, Flipkart & Amazon India. Prices fluctuate — always confirm before buying. ⚠️ = currently above ₹14K range.</footer>
+
+<script>
+function filterCards(cat, btn) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.card').forEach(card => {
+    if (cat === 'all') {
+      card.classList.remove('hidden');
+    } else {
+      const cats = card.dataset.cats || '';
+      if (cats.includes(cat)) {
+        card.classList.remove('hidden');
+      } else {
+        card.classList.add('hidden');
+      }
+    }
+  });
+}
+</script>
+</body>
+</html>
