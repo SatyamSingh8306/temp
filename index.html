@@ -1,515 +1,959 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Training Plan</title>
-
-<link rel="stylesheet"
-href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
-
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-:root{
-  --font-sans: Arial, Helvetica, sans-serif;
+  /* ── Reset & tokens ─────────────────────────────────────── */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-  --color-text-primary:#111827;
-  --color-text-secondary:#6B7280;
-
-  --color-border-secondary:#D1D5DB;
-  --color-border-tertiary:#E5E7EB;
-
-  --color-background-primary:#FFFFFF;
-  --color-background-secondary:#F3F4F6;
-
-  --border-radius-md:8px;
-  --border-radius-lg:14px;
-}
-
-*{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
-}
-
-body{
-  background:#f8fafc;
-  padding:20px;
-  font-family:var(--font-sans);
-}
-
-.app{
-  max-width:1100px;
-  margin:auto;
-  background:white;
-  border-radius:20px;
-  padding:20px;
-  box-shadow:0 8px 30px rgba(0,0,0,.08);
-}
-
-.sr-only{
-  position:absolute;
-  width:1px;
-  height:1px;
-  padding:0;
-  margin:-1px;
-  overflow:hidden;
-  clip:rect(0,0,0,0);
-  white-space:nowrap;
-  border:0;
-}
-
-h1{
-  font-size:28px;
-  font-weight:700;
-  color:var(--color-text-primary);
-  margin-bottom:6px;
-}
-
-.sub{
-  font-size:14px;
-  color:var(--color-text-secondary);
-  margin-bottom:20px;
-}
-
-.tabs{
-  display:flex;
-  gap:8px;
-  flex-wrap:wrap;
-  margin-bottom:20px;
-}
-
-.tab{
-  padding:10px 14px;
-  border:1px solid var(--color-border-secondary);
-  border-radius:10px;
-  cursor:pointer;
-  background:white;
-  transition:.2s;
-  font-size:14px;
-}
-
-.tab:hover{
-  background:#f3f4f6;
-}
-
-.tab.on{
-  background:#185FA5;
-  color:white;
-  border-color:#185FA5;
-}
-
-.panel{
-  display:none;
-}
-
-.panel.on{
-  display:block;
-}
-
-.badge{
-  display:inline-block;
-  font-size:12px;
-  font-weight:600;
-  padding:8px 12px;
-  border-radius:999px;
-  margin-bottom:10px;
-}
-
-.b-pull{
-  background:#E6F1FB;
-  color:#0C447C;
-}
-
-.b-push{
-  background:#FAECE7;
-  color:#993C1D;
-}
-
-.b-legs{
-  background:#EAF3DE;
-  color:#3B6D11;
-}
-
-.b-rec{
-  background:#F1EFE8;
-  color:#5F5E5A;
-}
-
-.goal{
-  color:var(--color-text-secondary);
-  margin-bottom:20px;
-}
-
-.sec{
-  font-size:12px;
-  text-transform:uppercase;
-  letter-spacing:.08em;
-  color:var(--color-text-secondary);
-  margin:18px 0 10px;
-}
-
-.exlist{
-  display:flex;
-  flex-direction:column;
-  gap:12px;
-}
-
-.ex{
-  border:1px solid var(--color-border-tertiary);
-  border-radius:var(--border-radius-lg);
-  overflow:hidden;
-  background:white;
-}
-
-.ex-head{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:16px;
-  cursor:pointer;
-}
-
-.ex-head:hover{
-  background:#f9fafb;
-}
-
-.ex-title{
-  font-weight:600;
-}
-
-.ex-sets{
-  font-size:13px;
-  color:var(--color-text-secondary);
-}
-
-.chevron{
-  margin-left:8px;
-  transition:.2s;
-}
-
-.ex.open .chevron{
-  transform:rotate(180deg);
-}
-
-.ex-body{
-  display:none;
-  padding:16px;
-  border-top:1px solid var(--color-border-tertiary);
-  gap:20px;
-  flex-wrap:wrap;
-}
-
-.ex.open .ex-body{
-  display:flex;
-}
-
-.img-wrap{
-  width:260px;
-  height:180px;
-  border-radius:12px;
-  overflow:hidden;
-  background:#f3f4f6;
-}
-
-.img-wrap img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-}
-
-.img-nav{
-  display:flex;
-  justify-content:center;
-  gap:8px;
-  margin-top:10px;
-}
-
-.img-dot{
-  width:10px;
-  height:10px;
-  border-radius:50%;
-  border:none;
-  background:#d1d5db;
-  cursor:pointer;
-}
-
-.img-dot.on{
-  background:#185FA5;
-}
-
-.info-col{
-  flex:1;
-  min-width:250px;
-}
-
-.ex-desc{
-  color:var(--color-text-secondary);
-  line-height:1.7;
-  margin-bottom:10px;
-}
-
-.tips{
-  padding-left:20px;
-}
-
-.tips li{
-  margin-bottom:8px;
-  color:var(--color-text-secondary);
-}
-
-.ma-box{
-  border-radius:14px;
-  background:#eef2ff;
-  padding:18px;
-}
-
-.ma-box h3{
-  margin-bottom:10px;
-}
-
-.ma-box ul{
-  padding-left:20px;
-}
-
-.ma-box li{
-  margin-bottom:8px;
-}
-
-@media(max-width:768px){
-  .img-wrap{
-    width:100%;
-    height:220px;
+  :root {
+    --bg:       #0f1117;
+    --bg2:      #1a1d27;
+    --bg3:      #22263a;
+    --border:   rgba(255,255,255,.08);
+    --border2:  rgba(255,255,255,.13);
+    --text:     #e8eaf6;
+    --muted:    #8b91b0;
+    --accent:   #5c7cfa;
+    --accent2:  #748ffc;
+    --pull:     #5c7cfa;
+    --push:     #f76707;
+    --legs:     #51cf66;
+    --rec:      #868e96;
+    --ma:       #cc5de8;
+    --rad:      14px;
+    --rad-sm:   8px;
+    --shadow:   0 4px 24px rgba(0,0,0,.45);
+    --trans:    .22s cubic-bezier(.4,0,.2,1);
+    font-family: 'Inter', system-ui, sans-serif;
   }
 
-  .ex-body{
-    flex-direction:column;
+  @media (prefers-color-scheme: light) {
+    :root {
+      --bg:     #f0f2fa;
+      --bg2:    #ffffff;
+      --bg3:    #eaecf7;
+      --border: rgba(0,0,0,.07);
+      --border2:rgba(0,0,0,.12);
+      --text:   #1a1d2e;
+      --muted:  #5a5f80;
+      --shadow: 0 4px 24px rgba(0,0,0,.10);
+    }
   }
 
-  h1{
-    font-size:22px;
+  body {
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    padding: 0;
   }
-}
+
+  /* ── Layout shell ───────────────────────────────────────── */
+  .shell {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 28px 16px 60px;
+  }
+
+  /* ── Header ─────────────────────────────────────────────── */
+  .hdr { margin-bottom: 28px; }
+  .hdr-top {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 6px;
+  }
+  .logo {
+    width: 38px; height: 38px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, var(--accent), var(--ma));
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  h1 { font-size: 22px; font-weight: 700; letter-spacing: -.3px; }
+  .sub { font-size: 13px; color: var(--muted); margin-top: 2px; }
+
+  /* ── Day tabs ────────────────────────────────────────────── */
+  .tabs {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin-bottom: 24px;
+  }
+  .tab {
+    padding: 7px 14px;
+    border-radius: var(--rad-sm);
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    border: 1px solid var(--border2);
+    background: var(--bg2);
+    color: var(--muted);
+    transition: all var(--trans);
+    user-select: none;
+    letter-spacing: .02em;
+  }
+  .tab:hover { border-color: var(--accent); color: var(--accent); }
+  .tab.on {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+    box-shadow: 0 2px 12px rgba(92,124,250,.4);
+  }
+  .tab-nut.on {
+    background: var(--ma);
+    border-color: var(--ma);
+    box-shadow: 0 2px 12px rgba(204,93,232,.4);
+  }
+
+  /* ── Panels ──────────────────────────────────────────────── */
+  .panel { display: none; animation: fadeUp .28s ease both; }
+  .panel.on { display: block; }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── Day hero banner ─────────────────────────────────────── */
+  .day-hero {
+    border-radius: var(--rad);
+    padding: 18px 20px;
+    margin-bottom: 22px;
+    border: 1px solid var(--border);
+    position: relative;
+    overflow: hidden;
+  }
+  .day-hero::before {
+    content:'';
+    position: absolute;
+    inset: 0;
+    opacity: .12;
+    pointer-events: none;
+  }
+  .hero-pull  { background: rgba(92,124,250,.1); }
+  .hero-pull::before  { background: radial-gradient(circle at 80% 50%, var(--pull), transparent 60%); }
+  .hero-push  { background: rgba(247,103,7,.1); }
+  .hero-push::before  { background: radial-gradient(circle at 80% 50%, var(--push), transparent 60%); }
+  .hero-legs  { background: rgba(81,207,102,.1); }
+  .hero-legs::before  { background: radial-gradient(circle at 80% 50%, var(--legs), transparent 60%); }
+  .hero-rec   { background: rgba(134,142,150,.1); }
+  .hero-rec::before   { background: radial-gradient(circle at 80% 50%, var(--rec), transparent 60%); }
+  .hero-ma    { background: rgba(204,93,232,.1); }
+  .hero-ma::before    { background: radial-gradient(circle at 80% 50%, var(--ma), transparent 60%); }
+
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 20px;
+    margin-bottom: 8px;
+  }
+  .badge-pull { background: rgba(92,124,250,.18); color: var(--pull); }
+  .badge-push { background: rgba(247,103,7,.18);  color: var(--push); }
+  .badge-legs { background: rgba(81,207,102,.18); color: var(--legs); }
+  .badge-rec  { background: rgba(134,142,150,.18);color: var(--rec);  }
+  .badge-ma   { background: rgba(204,93,232,.18); color: var(--ma);   }
+
+  .hero-title { font-size: 17px; font-weight: 700; margin-bottom: 4px; }
+  .hero-goal  { font-size: 13px; color: var(--muted); }
+
+  /* ── Section labels ──────────────────────────────────────── */
+  .sec-label {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .1em;
+    color: var(--muted);
+    margin: 22px 0 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .sec-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* ── Exercise cards ──────────────────────────────────────── */
+  .exlist { display: flex; flex-direction: column; gap: 8px; }
+
+  .ex {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: var(--rad);
+    overflow: hidden;
+    transition: border-color var(--trans), box-shadow var(--trans);
+  }
+  .ex:hover { border-color: var(--border2); }
+  .ex.open  {
+    border-color: rgba(92,124,250,.35);
+    box-shadow: 0 0 0 1px rgba(92,124,250,.15), var(--shadow);
+  }
+
+  .ex-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 13px 16px;
+    cursor: pointer;
+    user-select: none;
+    gap: 10px;
+  }
+  .ex-left  { display: flex; align-items: center; gap: 11px; flex: 1; min-width: 0; }
+  .ex-icon  {
+    width: 34px; height: 34px; border-radius: 9px;
+    background: var(--bg3);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 15px; flex-shrink: 0;
+  }
+  .ex-name  { font-size: 14px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .ex-sets  {
+    font-size: 11px; font-weight: 600;
+    color: var(--accent2);
+    background: rgba(92,124,250,.12);
+    padding: 3px 9px;
+    border-radius: 20px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .chevron {
+    width: 20px; height: 20px; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--muted);
+    transition: transform var(--trans);
+  }
+  .ex.open .chevron { transform: rotate(180deg); color: var(--accent); }
+  .chevron svg { width: 14px; height: 14px; }
+
+  /* ── Expanded body ───────────────────────────────────────── */
+  .ex-body {
+    display: none;
+    border-top: 1px solid var(--border);
+  }
+  .ex.open .ex-body { display: block; }
+
+  .ex-body-inner {
+    display: flex;
+    gap: 16px;
+    padding: 16px;
+    flex-wrap: wrap;
+  }
+
+  /* ── Animated image viewer ───────────────────────────────── */
+  .img-col { flex: 0 0 auto; }
+
+  .img-frame {
+    width: 200px;
+    height: 148px;
+    border-radius: var(--rad-sm);
+    background: var(--bg3);
+    overflow: hidden;
+    position: relative;
+  }
+  .img-frame img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: var(--rad-sm);
+    transition: opacity .4s ease;
+  }
+  .img-frame img.hide { opacity: 0; }
+  .img-frame img.show { opacity: 1; }
+
+  .anim-badge {
+    position: absolute;
+    top: 7px; right: 7px;
+    background: rgba(0,0,0,.6);
+    color: #fff;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: .05em;
+    padding: 3px 7px;
+    border-radius: 20px;
+    backdrop-filter: blur(4px);
+  }
+
+  .img-dots {
+    display: flex;
+    gap: 5px;
+    margin-top: 8px;
+    justify-content: center;
+  }
+  .img-dot {
+    width: 20px; height: 4px;
+    border-radius: 2px;
+    background: var(--border2);
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    transition: background var(--trans), width var(--trans);
+  }
+  .img-dot.on { background: var(--accent); width: 28px; }
+
+  /* ── Info column ─────────────────────────────────────────── */
+  .info-col { flex: 1; min-width: 180px; }
+
+  .ex-desc {
+    font-size: 12.5px;
+    color: var(--muted);
+    line-height: 1.7;
+    margin-bottom: 10px;
+  }
+
+  .tips-label {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    color: var(--muted);
+    margin-bottom: 6px;
+  }
+  .tips { list-style: none; display: flex; flex-direction: column; gap: 5px; }
+  .tips li {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.55;
+    padding-left: 14px;
+    position: relative;
+  }
+  .tips li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-size: 11px;
+  }
+
+  /* ── MA box ──────────────────────────────────────────────── */
+  .ma-box {
+    background: var(--bg2);
+    border: 1px solid rgba(204,93,232,.25);
+    border-radius: var(--rad);
+    padding: 16px 18px;
+    margin-top: 4px;
+  }
+  .ma-box-head {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    margin-bottom: 10px;
+  }
+  .ma-icon {
+    width: 30px; height: 30px;
+    border-radius: 8px;
+    background: rgba(204,93,232,.15);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 15px;
+  }
+  .ma-box h3 { font-size: 14px; font-weight: 600; color: var(--ma); }
+  .ma-list { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+  .ma-list li {
+    font-size: 13px;
+    color: var(--muted);
+    padding-left: 16px;
+    position: relative;
+  }
+  .ma-list li::before {
+    content: '◆';
+    position: absolute;
+    left: 0;
+    font-size: 7px;
+    top: 4px;
+    color: var(--ma);
+  }
+
+  /* green habit box */
+  .habit-box {
+    background: var(--bg2);
+    border: 1px solid rgba(81,207,102,.25);
+    border-radius: var(--rad);
+    padding: 16px 18px;
+    margin-top: 4px;
+  }
+  .habit-box h3 { font-size: 14px; font-weight: 600; color: var(--legs); margin-bottom: 10px; }
+  .habit-list { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+  .habit-list li {
+    font-size: 13px;
+    color: var(--muted);
+    padding-left: 16px;
+    position: relative;
+  }
+  .habit-list li::before {
+    content: '◆';
+    position: absolute;
+    left: 0;
+    font-size: 7px;
+    top: 4px;
+    color: var(--legs);
+  }
+
+  /* ── Nutrition panel ─────────────────────────────────────── */
+  .nut-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-bottom: 22px;
+  }
+  .nut-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: var(--rad);
+    padding: 16px 12px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .nut-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    border-radius: 2px 2px 0 0;
+  }
+  .nut-card:nth-child(1)::before { background: var(--legs); }
+  .nut-card:nth-child(2)::before { background: var(--pull); }
+  .nut-card:nth-child(3)::before { background: var(--ma);   }
+  .nut-val { font-size: 18px; font-weight: 700; margin-bottom: 4px; }
+  .nut-lbl { font-size: 10px; color: var(--muted); font-weight: 500; text-transform: uppercase; letter-spacing: .05em; }
+
+  .pri-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+    margin-top: 10px;
+  }
+  .pri-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: var(--rad-sm);
+    padding: 12px 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .pri-num {
+    width: 26px; height: 26px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; font-weight: 700;
+    flex-shrink: 0;
+  }
+  .pri-name { font-size: 13px; font-weight: 600; }
+
+  .rule-box {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: var(--rad);
+    padding: 16px 18px;
+    margin-top: 4px;
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.75;
+  }
+  .rule-box strong { color: var(--text); }
+
+  /* ── Responsive ──────────────────────────────────────────── */
+  @media (max-width: 460px) {
+    .img-frame { width: 100%; height: 180px; }
+    .img-col    { flex: 0 0 100%; }
+    .nut-grid   { grid-template-columns: repeat(3, 1fr); gap: 7px; }
+    .nut-val    { font-size: 14px; }
+    .pri-grid   { grid-template-columns: 1fr; }
+    .ex-name    { font-size: 13px; }
+  }
+
+  /* ── Scrollbar ───────────────────────────────────────────── */
+  ::-webkit-scrollbar { width: 5px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 99px; }
 </style>
 </head>
 <body>
+<div class="shell">
 
-<div class="app">
-  <h1>Your training plan</h1>
-  <p class="sub">
-    Tap any exercise to see how it's done — real images included
-  </p>
-
-  <div class="tabs">
-    <div class="tab on" onclick="show('mon',this)">Mon</div>
-    <div class="tab" onclick="show('tue',this)">Tue</div>
+  <!-- Header -->
+  <div class="hdr">
+    <div class="hdr-top">
+      <div class="logo">💪</div>
+      <div>
+        <h1>Training Plan</h1>
+        <p class="sub">Tap any exercise to see how it's done</p>
+      </div>
+    </div>
   </div>
 
+  <!-- Tabs -->
+  <div class="tabs" role="tablist">
+    <div class="tab on"  role="tab" onclick="show('mon',this)">Mon</div>
+    <div class="tab"     role="tab" onclick="show('tue',this)">Tue</div>
+    <div class="tab"     role="tab" onclick="show('wed',this)">Wed</div>
+    <div class="tab"     role="tab" onclick="show('thu',this)">Thu</div>
+    <div class="tab"     role="tab" onclick="show('fri',this)">Fri</div>
+    <div class="tab"     role="tab" onclick="show('sat',this)">Sat</div>
+    <div class="tab"     role="tab" onclick="show('sun',this)">Sun</div>
+    <div class="tab tab-nut" role="tab" onclick="show('nut',this)" style="margin-left:auto">🥗 Nutrition</div>
+  </div>
+
+  <!-- MON -->
   <div class="panel on" id="p-mon">
-    <span class="badge b-pull">Pull + Biceps</span>
-    <p class="goal">
-      45–60 min · Bigger back, biceps, pull-up strength
-    </p>
-
-    <div class="sec">Morning exercises</div>
+    <div class="day-hero hero-pull">
+      <div class="badge badge-pull">⬆ Pull + Biceps</div>
+      <div class="hero-title">Monday — Back & Arms</div>
+      <div class="hero-goal">45–60 min · Bigger back, biceps, pull-up strength</div>
+    </div>
+    <div class="sec-label">Morning exercises</div>
     <div class="exlist" id="l-mon"></div>
-
-    <div class="sec">Night — martial arts</div>
-
+    <div class="sec-label">Night — Martial Arts</div>
     <div class="ma-box">
-      <h3>Boxing basics</h3>
-      <ul>
+      <div class="ma-box-head"><div class="ma-icon">🥊</div><h3>Boxing basics</h3></div>
+      <ul class="ma-list">
         <li>Stance + guard position</li>
         <li>Jab–cross combo</li>
         <li>Footwork drills</li>
+        <li>Shadowboxing rounds</li>
       </ul>
     </div>
   </div>
 
+  <!-- TUE -->
   <div class="panel" id="p-tue">
-    <span class="badge b-push">Push</span>
-    <p class="goal">
-      45 min · Shoulders + triceps = arms look bigger
-    </p>
-
-    <div class="sec">Morning exercises</div>
+    <div class="day-hero hero-push">
+      <div class="badge badge-push">⬇ Push</div>
+      <div class="hero-title">Tuesday — Chest & Triceps</div>
+      <div class="hero-goal">45 min · Shoulders + triceps = arms look bigger</div>
+    </div>
+    <div class="sec-label">Morning exercises</div>
     <div class="exlist" id="l-tue"></div>
+    <div class="sec-label">Night — Martial Arts</div>
+    <div class="ma-box">
+      <div class="ma-box-head"><div class="ma-icon">🛡️</div><h3>Defense + movement</h3></div>
+      <ul class="ma-list">
+        <li>Slips and rolls</li>
+        <li>Parry drills</li>
+        <li>Lateral movement patterns</li>
+      </ul>
+    </div>
   </div>
-</div>
+
+  <!-- WED -->
+  <div class="panel" id="p-wed">
+    <div class="day-hero hero-rec">
+      <div class="badge badge-rec">♻ Recovery</div>
+      <div class="hero-title">Wednesday — Active Recovery</div>
+      <div class="hero-goal">15–20 min morning only · Full MA session tonight</div>
+    </div>
+    <div class="sec-label">Morning (light only)</div>
+    <div class="exlist" id="l-wed"></div>
+    <div class="sec-label">Night — Main Martial Arts Session</div>
+    <div class="ma-box">
+      <div class="ma-box-head"><div class="ma-icon">⚡</div><h3>Full technique session</h3></div>
+      <ul class="ma-list">
+        <li>Combo drills</li>
+        <li>Bag work if available</li>
+        <li>Sparring / partner work</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- THU -->
+  <div class="panel" id="p-thu">
+    <div class="day-hero hero-pull">
+      <div class="badge badge-pull">⬆ Pull + Arms</div>
+      <div class="hero-title">Thursday — Sleeve-Filler Day</div>
+      <div class="hero-goal">Arm volume focus · Build the peak</div>
+    </div>
+    <div class="sec-label">Morning exercises</div>
+    <div class="exlist" id="l-thu"></div>
+    <div class="sec-label">Night</div>
+    <div class="ma-box">
+      <div class="ma-box-head"><div class="ma-icon">😌</div><h3>Light shadowboxing</h3></div>
+      <ul class="ma-list"><li>Easy 2–3 rounds, no intensity</li></ul>
+    </div>
+  </div>
+
+  <!-- FRI -->
+  <div class="panel" id="p-fri">
+    <div class="day-hero hero-push">
+      <div class="badge badge-push">⬇ Push + Shoulders</div>
+      <div class="hero-title">Friday — Wider Frame</div>
+      <div class="hero-goal">Make the frame wider · Shoulder caps day</div>
+    </div>
+    <div class="sec-label">Morning exercises</div>
+    <div class="exlist" id="l-fri"></div>
+    <div class="sec-label">Night — Martial Arts</div>
+    <div class="ma-box">
+      <div class="ma-box-head"><div class="ma-icon">🔥</div><h3>Combos + conditioning</h3></div>
+      <ul class="ma-list">
+        <li>Full combo chains</li>
+        <li>Footwork under fatigue</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- SAT -->
+  <div class="panel" id="p-sat">
+    <div class="day-hero hero-legs">
+      <div class="badge badge-legs">🦵 Legs + Core</div>
+      <div class="hero-title">Saturday — Power Base</div>
+      <div class="hero-goal">Don't skip — martial power comes from legs</div>
+    </div>
+    <div class="sec-label">Morning exercises</div>
+    <div class="exlist" id="l-sat"></div>
+    <div class="sec-label">Night — Light movement</div>
+    <div class="ma-box">
+      <div class="ma-box-head"><div class="ma-icon">🌙</div><h3>Movement flow</h3></div>
+      <ul class="ma-list">
+        <li>Footwork patterns</li>
+        <li>Low-intensity shadowboxing</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- SUN -->
+  <div class="panel" id="p-sun">
+    <div class="day-hero hero-rec">
+      <div class="badge badge-rec">💤 Full Recovery</div>
+      <div class="hero-title">Sunday — Rest & Grow</div>
+      <div class="hero-goal">This is where muscle and skill actually grow</div>
+    </div>
+    <div class="sec-label">Today only</div>
+    <div class="exlist" id="l-sun"></div>
+    <div class="sec-label">Daily Pull-Up Habit — 5 min every single day</div>
+    <div class="habit-box">
+      <h3>✅ Do this daily</h3>
+      <ul class="habit-list">
+        <li>Dead hang — 2 × 20–30 sec</li>
+        <li>Scapular pull-ups — 2 × 8</li>
+        <li>Negative pull-ups — 3 slow reps</li>
+        <li>Assisted pull-ups — max reps</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- NUTRITION -->
+  <div class="panel" id="p-nut">
+    <div class="day-hero hero-ma">
+      <div class="badge badge-ma">🥗 Nutrition Strategy</div>
+      <div class="hero-title">Eat to Grow, Stay Lean</div>
+      <div class="hero-goal">Slow bulk · Stay in control of weight</div>
+    </div>
+    <div class="nut-grid">
+      <div class="nut-card"><div class="nut-val">+200</div><div class="nut-lbl">kcal surplus</div></div>
+      <div class="nut-card"><div class="nut-val">130–150g</div><div class="nut-lbl">protein / day</div></div>
+      <div class="nut-card"><div class="nut-val">77→82kg</div><div class="nut-lbl">target (slow)</div></div>
+    </div>
+    <div class="sec-label">Priority for bigger-looking arms (6ft frame)</div>
+    <div class="pri-grid">
+      <div class="pri-card">
+        <div class="pri-num" style="background:rgba(247,103,7,.18);color:var(--push)">1</div>
+        <div class="pri-name">Shoulders</div>
+      </div>
+      <div class="pri-card">
+        <div class="pri-num" style="background:rgba(92,124,250,.18);color:var(--pull)">2</div>
+        <div class="pri-name">Triceps</div>
+      </div>
+      <div class="pri-card">
+        <div class="pri-num" style="background:rgba(204,93,232,.18);color:var(--ma)">3</div>
+        <div class="pri-name">Back</div>
+      </div>
+      <div class="pri-card">
+        <div class="pri-num" style="background:rgba(81,207,102,.18);color:var(--legs)">4</div>
+        <div class="pri-name">Biceps</div>
+      </div>
+    </div>
+    <div class="sec-label">Golden rule</div>
+    <div class="rule-box">
+      <strong>If martial arts feels tiring, cut calisthenics volume 20–30%.</strong>
+      Recovery is where muscle and skill both improve. Never skip sleep or food chasing
+      a harder session — that's where progress actually happens.
+    </div>
+  </div>
+
+</div><!-- /shell -->
 
 <script>
-const BASE =
-'https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises';
+const BASE = 'https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/';
 
+/* ─── Exercise database ─────────────────────────────────────────── */
 const DB = {
-  "Push-ups":{
-    sets:"4 sets",
-    imgs:[
-      "Push-Up_Wide/0.jpg",
-      "Push-Up_Wide/1.jpg"
-    ],
-    desc:"Classic chest, shoulder and tricep movement.",
-    tips:[
-      "Keep body straight",
-      "Chest close to floor",
-      "Control the movement"
-    ]
+  "Dead hang": {
+    icon:"🔗", sets:"2×30 sec",
+    imgs:["Wide-Grip_Rear_Pull-Up/0.jpg","Wide-Grip_Rear_Pull-Up/1.jpg"],
+    desc:"Grab bar shoulder-width, arms fully straight. Just hang with all your bodyweight. Builds grip strength and decompresses the spine.",
+    tips:["Shoulders slightly engaged — don't fully collapse","Breathe normally and relax the neck","Work up to 60+ seconds over time"]
   },
-
-  "Pike push-ups":{
-    sets:"4 sets",
-    imgs:[
-      "Hanging_Pike/0.jpg",
-      "Hanging_Pike/1.jpg"
-    ],
-    desc:"Targets shoulders and upper chest.",
-    tips:[
-      "Keep hips high",
-      "Control descent"
-    ]
+  "Scapular pull-ups": {
+    icon:"🔼", sets:"3×8",
+    imgs:["Scapular_Pull-Up/0.jpg","Scapular_Pull-Up/1.jpg"],
+    desc:"Hang with straight arms, then squeeze shoulder blades DOWN and BACK without bending elbows. You rise a few inches. Activates the muscles that start a pull-up.",
+    tips:["Elbows stay straight the whole time","Think: push shoulder blades into back pockets","The single most important pull-up prep drill"]
   },
-
-  "Australian rows":{
-    sets:"4×10–15",
-    imgs:[
-      "Inverted_Row/0.jpg",
-      "Inverted_Row/1.jpg"
-    ],
-    desc:"Builds back thickness and pull-up strength.",
-    tips:[
-      "Squeeze shoulder blades",
-      "Keep body rigid"
-    ]
+  "Assisted/negative pull-ups": {
+    icon:"⬇", sets:"4 sets",
+    imgs:["Band_Assisted_Pull-Up/0.jpg","Band_Assisted_Pull-Up/1.jpg"],
+    desc:"NEGATIVE: Jump so chin is above bar, lower yourself as slowly as possible (5–10 sec). ASSISTED: Band looped under your knees reduces bodyweight.",
+    tips:["Slower descent = more muscle growth","Aim for 5-second lowering at minimum","Fastest path to your first real pull-up"]
+  },
+  "Australian rows": {
+    icon:"↗", sets:"4×10–15",
+    imgs:["Inverted_Row/0.jpg","Inverted_Row/1.jpg"],
+    desc:"Use a low bar or table edge. Body angled like a diagonal plank, heels on floor. Pull chest to bar. Great for back thickness and pull-up prep.",
+    tips:["Body stays rigid like a plank throughout","Squeeze shoulder blades together at the top","Lower the bar = harder the exercise"]
+  },
+  "Chin-up attempts": {
+    icon:"💪", sets:"3 sets",
+    imgs:["Chin-Up/0.jpg","Chin-Up/1.jpg"],
+    desc:"Underhand grip (palms face you), shoulder-width. Pull chin above bar. Can't do a full one? Do partial reps — just the bottom or top half still builds strength.",
+    tips:["Underhand grip is easier than overhand","Partial reps still build real strength","Squeeze biceps hard at the very top"]
+  },
+  "Backpack curls": {
+    icon:"🎒", sets:"4×10–15",
+    imgs:["Dumbbell_Bicep_Curl/0.jpg","Dumbbell_Bicep_Curl/1.jpg"],
+    desc:"Fill a backpack with books or water bottles. Hold the top strap and curl it up like a dumbbell. Full range — arm fully straightens at the bottom.",
+    tips:["Don't swing your torso","Squeeze hard at the top for 1 second","Add more books as it gets easy"]
+  },
+  "Hammer curls": {
+    icon:"🔨", sets:"3×12–15",
+    imgs:["Hammer_Curls/0.jpg","Hammer_Curls/1.jpg"],
+    desc:"Hold weights thumbs-up like gripping a hammer. Curl while keeping thumbs pointing up throughout. Works the brachialis — makes arms look thicker.",
+    tips:["Keep the wrist neutral — don't rotate","Slow on the way down (2 sec)","Best exercise for thick-arm look from the side"]
+  },
+  "Push-ups": {
+    icon:"✊", sets:"4 sets",
+    imgs:["Push-Up_Wide/0.jpg","Push-Up_Wide/1.jpg"],
+    desc:"Hands slightly wider than shoulder-width, body in a straight line. Lower chest to just above floor, then push up. The fundamental upper body push.",
+    tips:["Don't let hips sag or pike up","Full range — chest nearly touches the floor","Core stays braced throughout"]
+  },
+  "Decline push-ups": {
+    icon:"📐", sets:"3 sets",
+    imgs:["Decline_Push-Up/0.jpg","Decline_Push-Up/1.jpg"],
+    desc:"Feet elevated on a chair, hands on the floor. Your body angles downward. Shifts load to upper chest and front deltoids more than flat push-ups.",
+    tips:["Higher the feet = more upper chest","Keep core tight and body straight","Hands shoulder-width or slightly wider"]
+  },
+  "Diamond push-ups": {
+    icon:"💎", sets:"3 sets",
+    imgs:["Push-Ups_-_Close_Triceps_Position/0.jpg","Push-Ups_-_Close_Triceps_Position/1.jpg"],
+    desc:"Hands form a diamond/triangle on the floor under your chest. Lower down and push up. Heavily isolates the triceps — a major sleeve-filler.",
+    tips:["Elbows point backward, not out to the sides","Start on knees if it's too hard at first","The best bodyweight tricep exercise"]
+  },
+  "Pike push-ups": {
+    icon:"🔺", sets:"4 sets",
+    imgs:["Pike_Push-up/0.jpg","Pike_Push-up/1.jpg"],
+    desc:"Hips high forming an inverted V. Lower your head between your hands by bending elbows, then push back up. Directly builds the shoulder caps that make your frame wider.",
+    tips:["Hips stay high the entire movement","Elbows track slightly backward, not flared","This is the exercise that makes shoulders wide"]
+  },
+  "Chair dips": {
+    icon:"🪑", sets:"3 sets",
+    imgs:["Bench_Dips/0.jpg","Bench_Dips/1.jpg"],
+    desc:"Hands on the edge of a chair behind you, legs out in front. Bend elbows to lower your body, then push back up. Great tricep and shoulder builder.",
+    tips:["Keep your back close to the chair","Don't dip too deep — protect the shoulder","Feet further forward = harder exercise"]
+  },
+  "Dips": {
+    icon:"⬇", sets:"4 sets",
+    imgs:["Parallel_Bar_Dip/0.jpg","Parallel_Bar_Dip/1.jpg"],
+    desc:"Support full bodyweight on two chairs or parallel bars. Lower until elbows reach 90°, then press back up. Full-body suspended — much harder than bench dips.",
+    tips:["Slight forward lean = more chest engagement","Staying upright = more triceps","Slow and controlled on the way down"]
+  },
+  "Elevated pike push-ups": {
+    icon:"🏔", sets:"3 sets",
+    imgs:["Push-Ups_With_Feet_Elevated/0.jpg","Push-Ups_With_Feet_Elevated/1.jpg"],
+    desc:"Feet on a chair, hips high. Same movement as pike push-ups but much more shoulder load. Approaches a handstand push-up as feet get higher.",
+    tips:["Start with lower elevation and work up","Core absolutely must be tight","Directly builds strength for handstand push-ups"]
+  },
+  "Squats": {
+    icon:"🦵", sets:"4×20",
+    imgs:["Bodyweight_Squat/0.jpg","Bodyweight_Squat/1.jpg"],
+    desc:"Feet shoulder-width apart, toes slightly out. Push hips back and down until thighs are parallel to the floor, then drive through heels to stand.",
+    tips:["Chest stays up — don't fold forward","Knees track in line with toes","At 20 reps, control the pace — don't rush"]
+  },
+  "Jump squats": {
+    icon:"⚡", sets:"3×15",
+    imgs:["Freehand_Jump_Squat/0.jpg","Freehand_Jump_Squat/1.jpg"],
+    desc:"Squat down then explode upward, leaving the ground. Land softly by absorbing through bent knees. Builds explosive power for martial arts footwork and kicks.",
+    tips:["Land quietly — heels last, absorb with knees","Arms swing forward as you jump","Trains fast-twitch fibers you need for combat"]
+  },
+  "Bulgarian split squats": {
+    icon:"🎯", sets:"3×12 each leg",
+    imgs:["Split_Squats/0.jpg","Split_Squats/1.jpg"],
+    desc:"Rear foot elevated on chair, front foot stepped forward. Lower your back knee toward the floor. One of the most effective single-leg exercises with just bodyweight.",
+    tips:["Front foot far enough forward that shin stays vertical","Don't let front knee cave inward","Expect serious soreness — this is the hardest leg move here"]
+  },
+  "Calf raises": {
+    icon:"👟", sets:"4×20",
+    imgs:["Standing_Calf_Raises/0.jpg","Standing_Calf_Raises/1.jpg"],
+    desc:"Rise up onto tiptoes as high as possible, then lower down slowly. Do on the edge of a step for more range. Builds ankle stability important for martial arts stance.",
+    tips:["Full range of motion — heels go below step at the bottom","2–3 second lowering phase","Single-leg version is much harder when this gets easy"]
+  },
+  "Hanging knee raises": {
+    icon:"🔄", sets:"3 sets",
+    imgs:["Hanging_Leg_Raise/0.jpg","Hanging_Leg_Raise/1.jpg"],
+    desc:"Hang from pull-up bar. Raise both knees toward your chest, pause, then lower controlled. Works the entire core — abs, hip flexors, and obliques together.",
+    tips:["Don't swing — slow and controlled","Progress to straight-leg raises over time","Tuck pelvis at the top for maximum ab contraction"]
+  },
+  "Plank": {
+    icon:"🧱", sets:"3 rounds",
+    imgs:["Plank/0.jpg","Plank/1.jpg"],
+    desc:"Forearms and toes on the floor, body in a perfectly straight line. Hold. Builds anti-rotation core strength that directly powers your punches.",
+    tips:["Don't let hips sag or pike up","Squeeze glutes, abs, and quads simultaneously","Start at 20–30 sec; work up to 60+ seconds"]
+  },
+  "Forearm work": {
+    icon:"✋", sets:"2 sets",
+    imgs:["Kneeling_Forearm_Stretch/0.jpg","Kneeling_Forearm_Stretch/0.jpg"],
+    desc:"Rest forearm on your thigh, hold backpack handle, curl wrist up then down. Also do wrist rotations with a light weight. Grip strength = better clinch and grappling.",
+    tips:["Work both wrist flexion AND extension","Slow controlled reps — not speed","Your forearms will respond fast to direct work like this"]
+  },
+  "Stretching + mobility": {
+    icon:"🧘", sets:"15–20 min",
+    imgs:["Incline_Push-Up/0.jpg","Incline_Push-Up/0.jpg"],
+    desc:"Shoulder circles, hip circles, wrist rotations, hamstring stretches. Light movements to keep all joints healthy under the training volume.",
+    tips:["Hold each stretch for 30+ seconds","Breathe into tight areas","This is training — not optional recovery fluff"]
+  },
+  "Walking + mobility": {
+    icon:"🚶", sets:"20–30 min",
+    imgs:["Incline_Push-Up/0.jpg","Incline_Push-Up/0.jpg"],
+    desc:"20–30 min easy walk plus full-body mobility. Increases blood flow to help muscle repair. No intensity today — pure restoration.",
+    tips:["No guilt for doing nothing hard today","Good sleep tonight = better Monday","This is part of the program, not a break from it"]
   }
 };
 
-const days = {
-  mon:["Australian rows"],
-  tue:["Push-ups","Pike push-ups"]
+/* ─── Day → exercise lists ──────────────────────────────────────── */
+const DAYS = {
+  mon: ["Dead hang","Scapular pull-ups","Assisted/negative pull-ups","Australian rows","Chin-up attempts","Backpack curls","Hammer curls"],
+  tue: ["Push-ups","Decline push-ups","Diamond push-ups","Pike push-ups","Chair dips"],
+  wed: ["Stretching + mobility"],
+  thu: ["Assisted/negative pull-ups","Chin-up attempts","Australian rows","Backpack curls","Hammer curls","Forearm work"],
+  fri: ["Push-ups","Pike push-ups","Diamond push-ups","Dips","Elevated pike push-ups"],
+  sat: ["Squats","Jump squats","Bulgarian split squats","Calf raises","Hanging knee raises","Plank"],
+  sun: ["Walking + mobility"]
 };
 
-function buildList(dayKey){
-  const el = document.getElementById('l-'+dayKey);
+/* ─── Auto-flip animation timers ────────────────────────────────── */
+const animTimers = {};   // name → intervalId
 
-  if(!el || el.children.length) return;
+function startAnim(name, imgs) {
+  if (animTimers[name]) return;          // already running
+  if (imgs.length < 2) return;
 
-  (days[dayKey] || []).forEach(name=>{
+  let idx = 0;
+  const wrap = document.getElementById('iw-' + CSS.escape(name));
+  if (!wrap) return;
 
-    const d = DB[name];
-    const safeName =
-      name.replace(/\s+/g,'-');
+  animTimers[name] = setInterval(() => {
+    const imgEls = wrap.querySelectorAll('img');
+    if (imgEls.length < 2) return;
+    idx = idx === 0 ? 1 : 0;
+    imgEls.forEach((el, i) => {
+      el.classList.toggle('show', i === idx);
+      el.classList.toggle('hide', i !== idx);
+    });
+    // sync dots
+    const dots = wrap.closest('.img-col').querySelectorAll('.img-dot');
+    dots.forEach((d, i) => d.classList.toggle('on', i === idx));
+  }, 900);
+}
 
-    const imgs =
-      d.imgs.map(img => BASE+'/'+img);
+function stopAnim(name) {
+  clearInterval(animTimers[name]);
+  delete animTimers[name];
+}
 
-    const div =
-      document.createElement('div');
+/* ─── Build exercise list for a day ────────────────────────────── */
+function buildList(dayKey) {
+  const el = document.getElementById('l-' + dayKey);
+  if (!el || el.children.length) return;
 
-    div.className='ex';
+  (DAYS[dayKey] || []).forEach(name => {
+    const d = DB[name] || {};
+    const imgs = (d.imgs || []).map(p => BASE + p);
+    const esc  = CSS.escape(name);
 
-    div.innerHTML=`
-      <div class="ex-head"
-           onclick="tog(this.parentElement)">
+    const card = document.createElement('div');
+    card.className = 'ex';
 
-        <span class="ex-title">${name}</span>
+    /* build two stacked img tags so we can crossfade */
+    const imgHTML = imgs.length
+      ? `<img src="${imgs[0]}" class="show" alt="${name} start position" loading="lazy">
+         ${imgs[1] ? `<img src="${imgs[1]}" class="hide" alt="${name} end position" loading="lazy">` : ''}`
+      : `<span style="font-size:11px;color:var(--muted);padding:8px">Loading…</span>`;
 
-        <span>
-          <span class="ex-sets">
-            ${d.sets}
-          </span>
-
-          <i class="ti ti-chevron-down chevron"></i>
-        </span>
+    card.innerHTML = `
+      <div class="ex-head" onclick="togCard(this.parentElement,'${esc}',${JSON.stringify(imgs).replace(/"/g,'&quot;')})">
+        <div class="ex-left">
+          <div class="ex-icon">${d.icon || '🏋'}</div>
+          <span class="ex-name">${name}</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px">
+          ${d.sets ? `<span class="ex-sets">${d.sets}</span>` : ''}
+          <span class="chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
+        </div>
       </div>
-
       <div class="ex-body">
-
-        <div>
-          <div class="img-wrap"
-               id="img-${safeName}">
-            <img src="${imgs[0]}"
-                 alt="${name}">
+        <div class="ex-body-inner">
+          <div class="img-col">
+            <div class="img-frame" id="iw-${esc}">
+              ${imgHTML}
+              ${imgs.length > 1 ? '<span class="anim-badge">LIVE</span>' : ''}
+            </div>
+            ${imgs.length > 1 ? `<div class="img-dots">
+              <button class="img-dot on" aria-label="Start position"></button>
+              <button class="img-dot"    aria-label="End position"></button>
+            </div>` : ''}
           </div>
-
-          <div class="img-nav">
-            ${imgs.map((_,i)=>`
-            <button class="img-dot ${i===0?'on':''}"
-              onclick="swImg(
-                '${safeName}',
-                '${name}',
-                ${i},
-                event
-              )">
-            </button>`).join('')}
+          <div class="info-col">
+            <p class="ex-desc">${d.desc || ''}</p>
+            ${d.tips?.length ? `<p class="tips-label">Key cues</p><ul class="tips">${d.tips.map(t=>`<li>${t}</li>`).join('')}</ul>` : ''}
           </div>
         </div>
+      </div>`;
 
-        <div class="info-col">
-          <p class="ex-desc">
-            ${d.desc}
-          </p>
-
-          <ul class="tips">
-            ${d.tips.map(t=>`
-            <li>${t}</li>
-            `).join('')}
-          </ul>
-        </div>
-      </div>
-    `;
-
-    el.appendChild(div);
+    el.appendChild(card);
   });
 }
 
-function swImg(safeName,name,index,event){
-  event.stopPropagation();
+/* ─── Toggle a card open/closed ─────────────────────────────────── */
+function togCard(card, esc, imgs) {
+  const isOpen = card.classList.contains('open');
+  // find original name key
+  const name = Object.keys(DB).find(k => CSS.escape(k) === esc) || esc;
 
-  const d = DB[name];
-  const img =
-    BASE + '/' + d.imgs[index];
-
-  document.querySelector(
-    '#img-'+safeName+' img'
-  ).src = img;
-
-  const dots =
-    event.target.parentElement
-    .querySelectorAll('.img-dot');
-
-  dots.forEach((dot,i)=>{
-    dot.classList.toggle(
-      'on',
-      i===index
-    );
-  });
+  if (isOpen) {
+    card.classList.remove('open');
+    stopAnim(name);
+  } else {
+    card.classList.add('open');
+    startAnim(name, imgs);
+  }
 }
 
-function tog(card){
-  card.classList.toggle('open');
-}
+/* ─── Show a day panel ──────────────────────────────────────────── */
+function show(key, tab) {
+  // stop all running animations when switching days
+  Object.keys(animTimers).forEach(stopAnim);
 
-function show(key,tab){
-
-  document
-    .querySelectorAll('.panel')
-    .forEach(p=>p.classList.remove('on'));
-
-  document
-    .querySelectorAll('.tab')
-    .forEach(t=>t.classList.remove('on'));
-
-  document
-    .getElementById('p-'+key)
-    .classList.add('on');
-
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('on'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('on'));
+  document.getElementById('p-' + key).classList.add('on');
   tab.classList.add('on');
-
   buildList(key);
 }
 
+/* ─── Init ──────────────────────────────────────────────────────── */
 buildList('mon');
 </script>
-
 </body>
 </html>
