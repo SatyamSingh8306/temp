@@ -11,412 +11,358 @@
 
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:var(--font-sans)}
-.app{padding:1rem 0}
-.header{margin-bottom:1.5rem}
-.header h1{font-size:22px;font-weight:500;color:var(--color-text-primary)}
-.header p{font-size:14px;color:var(--color-text-secondary);margin-top:4px}
-.day-tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:1.5rem}
-.day-tab{padding:6px 14px;border:0.5px solid var(--color-border-secondary);border-radius:var(--border-radius-md);font-size:13px;cursor:pointer;background:var(--color-background-primary);color:var(--color-text-secondary);transition:all 0.15s}
-.day-tab:hover{background:var(--color-background-secondary)}
-.day-tab.active{background:#185FA5;color:#E6F1FB;border-color:#185FA5}
-.day-tab.recovery{background:var(--color-background-secondary)}
-.day-panel{display:none}
-.day-panel.active{display:block}
-.day-header{display:flex;align-items:center;gap:12px;margin-bottom:1rem}
-.day-badge{font-size:12px;padding:4px 10px;border-radius:var(--border-radius-md);font-weight:500}
-.badge-pull{background:#E6F1FB;color:#0C447C}
-.badge-push{background:#FAECE7;color:#993C1D}
-.badge-legs{background:#EAF3DE;color:#3B6D11}
-.badge-recovery{background:#F1EFE8;color:#5F5E5A}
-.badge-martial{background:#EEEDFE;color:#3C3489}
-.day-goal{font-size:13px;color:var(--color-text-secondary);font-style:italic}
-.section-label{font-size:12px;font-weight:500;color:var(--color-text-secondary);text-transform:uppercase;letter-spacing:0.06em;margin:1rem 0 0.5rem}
-.exercise-list{display:flex;flex-direction:column;gap:8px}
-.exercise-card{border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:12px 14px;background:var(--color-background-primary);cursor:pointer;transition:border-color 0.15s}
-.exercise-card:hover{border-color:var(--color-border-primary)}
-.exercise-card.open{border-color:#185FA5}
-.ex-top{display:flex;align-items:center;justify-content:space-between;gap:8px}
-.ex-name{font-size:14px;font-weight:500;color:var(--color-text-primary)}
-.ex-sets{font-size:12px;color:var(--color-text-secondary);white-space:nowrap}
-.ex-chevron{font-size:16px;color:var(--color-text-secondary);transition:transform 0.2s}
-.exercise-card.open .ex-chevron{transform:rotate(180deg)}
-.ex-detail{display:none;margin-top:12px;padding-top:12px;border-top:0.5px solid var(--color-border-tertiary)}
-.exercise-card.open .ex-detail{display:block}
-.ex-gif{width:100%;max-width:280px;border-radius:var(--border-radius-md);margin-bottom:10px;background:var(--color-background-secondary);min-height:140px;display:flex;align-items:center;justify-content:center;overflow:hidden}
-.ex-gif img{width:100%;border-radius:var(--border-radius-md)}
-.ex-desc{font-size:13px;color:var(--color-text-secondary);line-height:1.6}
-.ex-tips{margin-top:8px}
-.ex-tips li{font-size:12px;color:var(--color-text-secondary);margin-left:1rem;line-height:1.7}
-.martial-block{border:0.5px solid #AFA9EC;border-radius:var(--border-radius-lg);padding:14px;background:#EEEDFE}
-.martial-block h3{font-size:14px;font-weight:500;color:#3C3489;margin-bottom:8px}
-.martial-block li{font-size:13px;color:#534AB7;margin-left:1rem;line-height:1.8}
-.nutrition-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin-top:0.5rem}
-.nut-card{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:12px;text-align:center}
-.nut-val{font-size:20px;font-weight:500;color:var(--color-text-primary)}
-.nut-lbl{font-size:11px;color:var(--color-text-secondary);margin-top:2px}
-.pullup-block{border:0.5px solid #9FE1CB;border-radius:var(--border-radius-lg);padding:14px;background:#E1F5EE;margin-top:0.5rem}
-.pullup-block h3{font-size:13px;font-weight:500;color:#0F6E56;margin-bottom:6px}
-.pullup-block li{font-size:13px;color:#1D9E75;margin-left:1rem;line-height:1.8}
+.app{padding:0.5rem 0;font-family:var(--font-sans)}
+h1{font-size:20px;font-weight:500;color:var(--color-text-primary);margin-bottom:3px}
+.sub{font-size:13px;color:var(--color-text-secondary);margin-bottom:1rem}
+.tabs{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:1.1rem}
+.tab{padding:5px 12px;border:0.5px solid var(--color-border-secondary);border-radius:var(--border-radius-md);font-size:12px;cursor:pointer;background:var(--color-background-primary);color:var(--color-text-secondary)}
+.tab.on{background:#185FA5;color:#E6F1FB;border-color:#185FA5}
+.panel{display:none}.panel.on{display:block}
+.badge{display:inline-block;font-size:11px;font-weight:500;padding:3px 9px;border-radius:var(--border-radius-md);margin-bottom:5px}
+.b-pull{background:#E6F1FB;color:#0C447C}
+.b-push{background:#FAECE7;color:#993C1D}
+.b-legs{background:#EAF3DE;color:#3B6D11}
+.b-rec{background:#F1EFE8;color:#5F5E5A}
+.b-ma{background:#EEEDFE;color:#3C3489}
+.goal{font-size:12px;color:var(--color-text-secondary);margin-bottom:.9rem;font-style:italic}
+.sec{font-size:11px;font-weight:500;color:var(--color-text-secondary);text-transform:uppercase;letter-spacing:.06em;margin:.9rem 0 .45rem}
+.exlist{display:flex;flex-direction:column;gap:7px}
+.ex{border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);overflow:hidden;background:var(--color-background-primary)}
+.ex-head{display:flex;align-items:center;justify-content:space-between;padding:10px 13px;cursor:pointer;user-select:none}
+.ex-head:hover{background:var(--color-background-secondary)}
+.ex-title{font-size:13px;font-weight:500;color:var(--color-text-primary)}
+.ex-sets{font-size:11px;color:var(--color-text-secondary);margin-right:6px}
+.chevron{font-size:14px;color:var(--color-text-secondary);transition:transform .2s}
+.ex.open .chevron{transform:rotate(180deg)}
+.ex-body{display:none;padding:12px 13px;border-top:0.5px solid var(--color-border-tertiary)}
+.ex.open .ex-body{display:flex;gap:12px;flex-wrap:wrap}
+.img-col{flex:0 0 auto}
+.img-wrap{width:200px;height:140px;border-radius:var(--border-radius-md);overflow:hidden;background:var(--color-background-secondary);display:flex;align-items:center;justify-content:center}
+.img-wrap img{width:100%;height:100%;object-fit:cover;border-radius:var(--border-radius-md)}
+.img-nav{display:flex;gap:5px;margin-top:6px}
+.img-dot{width:6px;height:6px;border-radius:50%;background:var(--color-border-secondary);cursor:pointer;border:none;padding:0}
+.img-dot.on{background:#185FA5}
+.info-col{flex:1;min-width:180px}
+.ex-desc{font-size:12px;color:var(--color-text-secondary);line-height:1.65;margin-bottom:7px}
+.tips{padding-left:1rem}
+.tips li{font-size:11px;color:var(--color-text-secondary);line-height:1.75}
+.ma-box{border:0.5px solid #AFA9EC;border-radius:var(--border-radius-lg);padding:11px 13px;background:#EEEDFE}
+.ma-box h3{font-size:13px;font-weight:500;color:#3C3489;margin-bottom:5px}
+.ma-box li{font-size:12px;color:#534AB7;margin-left:1rem;line-height:1.8}
+.nut-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:1rem}
+.nut-c{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:10px;text-align:center}
+.nut-v{font-size:15px;font-weight:500;color:var(--color-text-primary)}
+.nut-l{font-size:10px;color:var(--color-text-secondary);margin-top:2px}
+.pri-row{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}
+.pri-tag{font-size:12px;font-weight:500;padding:5px 12px;border-radius:var(--border-radius-md)}
+.loading-img{font-size:11px;color:var(--color-text-secondary)}
 </style>
-
+<body>
 <div class="app">
-  <h2 class="sr-only">Weekly martial arts and calisthenics training plan with exercise guides</h2>
-  <div class="header">
-    <h1>Your weekly training plan</h1>
-    <p>Tap any exercise to see how it's done</p>
-  </div>
+<h2 class="sr-only">Weekly training plan with real exercise images</h2>
+<h1>Your training plan</h1>
+<p class="sub">Tap any exercise to see how it's done — real images included</p>
 
-  <div class="day-tabs">
-    <div class="day-tab active" onclick="showDay('mon')">Mon</div>
-    <div class="day-tab" onclick="showDay('tue')">Tue</div>
-    <div class="day-tab" onclick="showDay('wed')">Wed</div>
-    <div class="day-tab" onclick="showDay('thu')">Thu</div>
-    <div class="day-tab" onclick="showDay('fri')">Fri</div>
-    <div class="day-tab" onclick="showDay('sat')">Sat</div>
-    <div class="day-tab recovery" onclick="showDay('sun')">Sun</div>
-    <div class="day-tab" onclick="showDay('nutrition')" style="margin-left:auto">Nutrition</div>
-  </div>
+<div class="tabs">
+  <div class="tab on" onclick="show('mon',this)">Mon</div>
+  <div class="tab" onclick="show('tue',this)">Tue</div>
+  <div class="tab" onclick="show('wed',this)">Wed</div>
+  <div class="tab" onclick="show('thu',this)">Thu</div>
+  <div class="tab" onclick="show('fri',this)">Fri</div>
+  <div class="tab" onclick="show('sat',this)">Sat</div>
+  <div class="tab" onclick="show('sun',this)">Sun</div>
+  <div class="tab" onclick="show('nut',this)" style="margin-left:auto">Nutrition</div>
+</div>
 
-  <!-- MONDAY -->
-  <div class="day-panel active" id="day-mon">
-    <div class="day-header">
-      <span class="day-badge badge-pull">Pull + Biceps</span>
-      <span class="day-goal">45–60 min · Bigger back, biceps, pull-up strength</span>
-    </div>
-    <div class="section-label">Morning exercises</div>
-    <div class="exercise-list" id="list-mon"></div>
-    <div class="section-label" style="margin-top:1.25rem">Night — martial arts (30–45 min)</div>
-    <div class="martial-block">
-      <h3><i class="ti ti-shield" aria-hidden="true"></i> Boxing basics</h3>
-      <ul>
-        <li>Stance + guard position</li>
-        <li>Jab–cross combo</li>
-        <li>Footwork drills</li>
-        <li>Shadowboxing rounds</li>
-      </ul>
-    </div>
-  </div>
+<div class="panel on" id="p-mon">
+  <span class="badge b-pull">Pull + Biceps</span>
+  <p class="goal">45–60 min · Bigger back, biceps, pull-up strength</p>
+  <div class="sec">Morning exercises</div>
+  <div class="exlist" id="l-mon"></div>
+  <div class="sec">Night — martial arts (30–45 min)</div>
+  <div class="ma-box"><h3>Boxing basics</h3><ul><li>Stance + guard position</li><li>Jab–cross combo</li><li>Footwork drills</li><li>Shadowboxing</li></ul></div>
+</div>
 
-  <!-- TUESDAY -->
-  <div class="day-panel" id="day-tue">
-    <div class="day-header">
-      <span class="day-badge badge-push">Push</span>
-      <span class="day-goal">45 min · Shoulders + triceps = arms look bigger</span>
-    </div>
-    <div class="section-label">Morning exercises</div>
-    <div class="exercise-list" id="list-tue"></div>
-    <div class="section-label" style="margin-top:1.25rem">Night — martial arts</div>
-    <div class="martial-block">
-      <h3><i class="ti ti-arrows-move" aria-hidden="true"></i> Defense + movement</h3>
-      <ul>
-        <li>Slips and rolls</li>
-        <li>Parry drills</li>
-        <li>Lateral movement</li>
-      </ul>
-    </div>
-  </div>
+<div class="panel" id="p-tue">
+  <span class="badge b-push">Push</span>
+  <p class="goal">45 min · Shoulders + triceps = arms look bigger</p>
+  <div class="sec">Morning exercises</div>
+  <div class="exlist" id="l-tue"></div>
+  <div class="sec">Night — martial arts</div>
+  <div class="ma-box"><h3>Defense + movement</h3><ul><li>Slips and rolls</li><li>Parry drills</li><li>Lateral movement</li></ul></div>
+</div>
 
-  <!-- WEDNESDAY -->
-  <div class="day-panel" id="day-wed">
-    <div class="day-header">
-      <span class="day-badge badge-recovery">Recovery + Martial Arts</span>
-      <span class="day-goal">15–20 min morning only</span>
-    </div>
-    <div class="section-label">Morning (light only)</div>
-    <div class="exercise-list" id="list-wed"></div>
-    <div class="section-label" style="margin-top:1.25rem">Night — main martial arts session</div>
-    <div class="martial-block">
-      <h3><i class="ti ti-star" aria-hidden="true"></i> Full technique session</h3>
-      <ul>
-        <li>Combo drills</li>
-        <li>Bag work (if available)</li>
-        <li>Sparring / partner work</li>
-      </ul>
-    </div>
-  </div>
+<div class="panel" id="p-wed">
+  <span class="badge b-rec">Recovery + Martial Arts</span>
+  <p class="goal">15–20 min morning only</p>
+  <div class="sec">Morning (light only)</div>
+  <div class="exlist" id="l-wed"></div>
+  <div class="sec">Night — main martial arts session</div>
+  <div class="ma-box"><h3>Full technique session</h3><ul><li>Combo drills</li><li>Bag work if available</li><li>Sparring / partner work</li></ul></div>
+</div>
 
-  <!-- THURSDAY -->
-  <div class="day-panel" id="day-thu">
-    <div class="day-header">
-      <span class="day-badge badge-pull">Pull + Arms</span>
-      <span class="day-goal">Sleeve-filler day</span>
-    </div>
-    <div class="section-label">Morning exercises</div>
-    <div class="exercise-list" id="list-thu"></div>
-    <div class="section-label" style="margin-top:1.25rem">Night</div>
-    <div class="martial-block">
-      <h3><i class="ti ti-flame" aria-hidden="true"></i> Light shadowboxing</h3>
-      <ul><li>Easy 2–3 rounds, no intensity</li></ul>
-    </div>
-  </div>
+<div class="panel" id="p-thu">
+  <span class="badge b-pull">Pull + Arms</span>
+  <p class="goal">Sleeve-filler day</p>
+  <div class="sec">Morning exercises</div>
+  <div class="exlist" id="l-thu"></div>
+  <div class="sec">Night</div>
+  <div class="ma-box"><h3>Light shadowboxing</h3><ul><li>Easy 2–3 rounds, no intensity</li></ul></div>
+</div>
 
-  <!-- FRIDAY -->
-  <div class="day-panel" id="day-fri">
-    <div class="day-header">
-      <span class="day-badge badge-push">Push + Shoulders</span>
-      <span class="day-goal">Make the frame wider</span>
-    </div>
-    <div class="section-label">Morning exercises</div>
-    <div class="exercise-list" id="list-fri"></div>
-    <div class="section-label" style="margin-top:1.25rem">Night — martial arts</div>
-    <div class="martial-block">
-      <h3><i class="ti ti-shield-bolt" aria-hidden="true"></i> Combos + conditioning</h3>
-      <ul><li>Full combo chains</li><li>Footwork under fatigue</li></ul>
-    </div>
-  </div>
+<div class="panel" id="p-fri">
+  <span class="badge b-push">Push + Shoulders</span>
+  <p class="goal">Make the frame wider</p>
+  <div class="sec">Morning exercises</div>
+  <div class="exlist" id="l-fri"></div>
+  <div class="sec">Night — martial arts</div>
+  <div class="ma-box"><h3>Combos + conditioning</h3><ul><li>Full combo chains</li><li>Footwork under fatigue</li></ul></div>
+</div>
 
-  <!-- SATURDAY -->
-  <div class="day-panel" id="day-sat">
-    <div class="day-header">
-      <span class="day-badge badge-legs">Legs + Core</span>
-      <span class="day-goal">Don't skip — martial power comes from legs</span>
-    </div>
-    <div class="section-label">Morning exercises</div>
-    <div class="exercise-list" id="list-sat"></div>
-    <div class="section-label" style="margin-top:1.25rem">Night — light martial arts / movement</div>
-    <div class="martial-block">
-      <h3><i class="ti ti-run" aria-hidden="true"></i> Movement flow</h3>
-      <ul><li>Footwork patterns</li><li>Low-intensity shadowboxing</li></ul>
-    </div>
-  </div>
+<div class="panel" id="p-sat">
+  <span class="badge b-legs">Legs + Core</span>
+  <p class="goal">Don't skip — martial power comes from legs</p>
+  <div class="sec">Morning exercises</div>
+  <div class="exlist" id="l-sat"></div>
+  <div class="sec">Night — light movement</div>
+  <div class="ma-box"><h3>Movement flow</h3><ul><li>Footwork patterns</li><li>Low-intensity shadowboxing</li></ul></div>
+</div>
 
-  <!-- SUNDAY -->
-  <div class="day-panel" id="day-sun">
-    <div class="day-header">
-      <span class="day-badge badge-recovery">Full recovery</span>
-      <span class="day-goal">This is where muscle and skill actually grow</span>
-    </div>
-    <div class="section-label">Today only</div>
-    <div class="exercise-list" id="list-sun"></div>
-    <div class="section-label" style="margin-top:1.25rem">Daily pull-up habit (5 min, every day)</div>
-    <div class="pullup-block">
-      <h3>Do this every single day</h3>
-      <ul>
-        <li>Dead hang — 2 × 20–30 sec</li>
-        <li>Scapular pull-ups — 2 × 8</li>
-        <li>Negative pull-ups — 3 slow reps</li>
-        <li>Assisted pull-ups — as many as possible</li>
-      </ul>
-    </div>
-  </div>
+<div class="panel" id="p-sun">
+  <span class="badge b-rec">Full recovery</span>
+  <p class="goal">This is where muscle and skill actually grow</p>
+  <div class="sec">Today only</div>
+  <div class="exlist" id="l-sun"></div>
+  <div class="sec" style="margin-top:1rem">Daily pull-up habit — 5 min every single day</div>
+  <div class="ma-box" style="border-color:#9FE1CB;background:#E1F5EE"><h3 style="color:#0F6E56">Do this daily</h3><ul style="color:#1D9E75"><li>Dead hang — 2 × 20–30 sec</li><li>Scapular pull-ups — 2 × 8</li><li>Negative pull-ups — 3 slow reps</li><li>Assisted pull-ups — max reps</li></ul></div>
+</div>
 
-  <!-- NUTRITION -->
-  <div class="day-panel" id="day-nutrition">
-    <div class="day-header">
-      <span class="day-badge badge-martial">Nutrition strategy</span>
-      <span class="day-goal">Eat to grow, stay lean</span>
-    </div>
-    <div class="nutrition-grid">
-      <div class="nut-card"><div class="nut-val">+150–200</div><div class="nut-lbl">cal above maintenance</div></div>
-      <div class="nut-card"><div class="nut-val">130–150g</div><div class="nut-lbl">protein per day</div></div>
-      <div class="nut-card"><div class="nut-val">77 → 82 kg</div><div class="nut-lbl">target weight (slow)</div></div>
-    </div>
-    <div class="section-label">One rule</div>
-    <p style="font-size:14px;color:var(--color-text-secondary);line-height:1.7">If martial arts feels slow or tiring, reduce calisthenics volume by 20–30% — don't push through fatigue. Recovery is where both muscle and skill improve.</p>
-    <div class="section-label">Priority order for your frame</div>
-    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:4px">
-      <span style="background:#FAECE7;color:#712B13;padding:6px 14px;border-radius:var(--border-radius-md);font-size:13px;font-weight:500">1. Shoulders</span>
-      <span style="background:#E6F1FB;color:#0C447C;padding:6px 14px;border-radius:var(--border-radius-md);font-size:13px;font-weight:500">2. Triceps</span>
-      <span style="background:#EEEDFE;color:#3C3489;padding:6px 14px;border-radius:var(--border-radius-md);font-size:13px;font-weight:500">3. Back</span>
-      <span style="background:#EAF3DE;color:#27500A;padding:6px 14px;border-radius:var(--border-radius-md);font-size:13px;font-weight:500">4. Biceps</span>
-    </div>
+<div class="panel" id="p-nut">
+  <span class="badge b-ma">Nutrition strategy</span>
+  <p class="goal">Eat to grow, stay lean</p>
+  <div class="nut-grid">
+    <div class="nut-c"><div class="nut-v">+200 cal</div><div class="nut-l">above maintenance</div></div>
+    <div class="nut-c"><div class="nut-v">130–150g</div><div class="nut-l">protein / day</div></div>
+    <div class="nut-c"><div class="nut-v">77→82 kg</div><div class="nut-l">target (slow)</div></div>
   </div>
+  <div class="sec">Priority for bigger-looking arms on a 6ft frame</div>
+  <div class="pri-row">
+    <span class="pri-tag" style="background:#FAECE7;color:#712B13">1. Shoulders</span>
+    <span class="pri-tag" style="background:#E6F1FB;color:#0C447C">2. Triceps</span>
+    <span class="pri-tag" style="background:#EEEDFE;color:#3C3489">3. Back</span>
+    <span class="pri-tag" style="background:#EAF3DE;color:#27500A">4. Biceps</span>
+  </div>
+  <div class="sec" style="margin-top:1rem">One rule</div>
+  <p style="font-size:13px;color:var(--color-text-secondary);line-height:1.7">If martial arts feels tiring, cut calisthenics volume 20–30%. Recovery is where muscle and skill both improve.</p>
 </div>
 
 <script>
-const exercises = {
+const BASE = 'https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises';
+
+const DB = {
   "Dead hang": {
-    sets: "2 × 30 sec",
-    gif: "https://media.giphy.com/media/l0HlBO7eyXzSZkJri/giphy.gif",
-    desc: "Grab a bar with both hands shoulder-width apart, arms fully straight. Hang with your full bodyweight. Don't pull — just hang. Builds grip strength and decompresses the spine.",
-    tips: ["Keep shoulders slightly engaged — don't let them fully collapse", "Breathe normally throughout", "Work up to 60+ seconds over time"]
+    sets:"2×30 sec",
+    imgs:["Wide-Grip_Rear_Pull-Up/0.jpg","Wide-Grip_Rear_Pull-Up/1.jpg"],
+    desc:"Grab bar shoulder-width apart, arms fully straight. Just hang with all your bodyweight. Builds grip strength and decompresses the spine.",
+    tips:["Shoulders slightly engaged — don't fully collapse","Breathe normally","Work up to 60+ seconds over time"]
   },
   "Scapular pull-ups": {
-    sets: "3 × 8",
-    gif: "https://media.giphy.com/media/26BRBKqUiq586bRVm/giphy.gif",
-    desc: "Hang from the bar with straight arms, then squeeze your shoulder blades DOWN and BACK without bending your elbows. You'll rise a few inches. This trains the muscles that start a pull-up.",
-    tips: ["Elbows stay straight the whole time", "Think: 'put your shoulder blades in your back pockets'", "Crucial for pull-up progress"]
+    sets:"3×8",
+    imgs:["Scapular_Pull-Up/0.jpg","Scapular_Pull-Up/1.jpg"],
+    desc:"Hang with straight arms, then squeeze shoulder blades DOWN and BACK without bending elbows. You rise a few inches. Activates the muscles that start a pull-up.",
+    tips:["Elbows stay straight the whole time","Think: push shoulder blades into your back pockets","The single most important drill for pull-up progress"]
   },
   "Assisted/negative pull-ups": {
-    sets: "4 sets",
-    gif: "https://media.giphy.com/media/KyGiMJokZEQvu/giphy.gif",
-    desc: "NEGATIVE: Jump or step up so your chin is above the bar, then lower yourself as slowly as possible (5–10 seconds). ASSISTED: Use a resistance band looped on the bar under your knees, or have someone hold your ankles lightly.",
-    tips: ["Slower negatives = more muscle growth", "Aim for 5-second descent minimum", "This is the fastest way to get your first pull-up"]
+    sets:"4 sets",
+    imgs:["Band_Assisted_Pull-Up/0.jpg","Band_Assisted_Pull-Up/1.jpg"],
+    desc:"NEGATIVE: Jump so chin is above bar, lower yourself as slowly as possible (5–10 sec). ASSISTED: Band looped around bar under your knees reduces bodyweight.",
+    tips:["Slower descent = more muscle growth","Aim for 5-second lowering at minimum","Fastest path to your first real pull-up"]
   },
   "Australian rows": {
-    sets: "4 × 10–15",
-    gif: "https://media.giphy.com/media/3oEjHFOscgNwdSRRDy/giphy.gif",
-    desc: "Use a low bar, table edge, or rings. Body straight and diagonal, heels on floor. Pull your chest up to the bar. Easier version of a pull-up — great for building back thickness.",
-    tips: ["Body stays rigid like a plank", "Squeeze shoulder blades together at the top", "Lower bar = harder exercise"]
+    sets:"4×10–15",
+    imgs:["Inverted_Row/0.jpg","Inverted_Row/1.jpg"],
+    desc:"Use a low bar or table edge. Body angled like a diagonal plank, heels on floor. Pull chest to bar. A horizontal pull — great for back thickness and pull-up prep.",
+    tips:["Body stays rigid like a plank throughout","Squeeze shoulder blades together at the top","Lower the bar = harder the exercise"]
   },
   "Chin-up attempts": {
-    sets: "3 sets",
-    gif: "https://media.giphy.com/media/xT9IgH8SSMBHhSgkZO/giphy.gif",
-    desc: "Underhand grip (palms facing you), shoulder-width apart. Try to pull your chin above the bar. If you can't complete one, do partial reps (just the bottom half, or top half).",
-    tips: ["Underhand grip is easier than overhand", "Even partial movement builds strength", "Squeeze biceps hard at the top"]
+    sets:"3 sets",
+    imgs:["Chin-Up/0.jpg","Chin-Up/1.jpg"],
+    desc:"Underhand grip (palms face you), shoulder-width. Pull chin above bar. Can't do a full one? Do partial reps — just the bottom or top half still builds strength.",
+    tips:["Underhand grip is easier than overhand","Partial reps still build real strength","Squeeze biceps hard at the very top"]
   },
   "Backpack curls": {
-    sets: "4 × 10–15",
-    gif: "https://media.giphy.com/media/QvBoMEcQ7DQXK/giphy.gif",
-    desc: "Fill a backpack with books or water bottles. Hold the top strap with both hands or one hand. Curl it up like a dumbbell. Full range of motion — arm fully straightens at the bottom.",
-    tips: ["Don't swing your body", "Squeeze hard at the top", "Add weight gradually as it gets easy"]
+    sets:"4×10–15",
+    imgs:["Dumbbell_Bicep_Curl/0.jpg","Dumbbell_Bicep_Curl/1.jpg"],
+    desc:"Fill a backpack with books or water bottles. Hold the top strap and curl it up like a dumbbell. Full range — arm fully straightens at the bottom.",
+    tips:["Don't swing your torso","Squeeze hard at the top for 1 second","Add more books as it gets easy"]
   },
   "Hammer curls": {
-    sets: "3 × 12–15",
-    gif: "https://media.giphy.com/media/l3q2K5jinAlChoCLS/giphy.gif",
-    desc: "Hold weights (or a backpack handle) with thumbs pointing up — like holding a hammer. Curl up while keeping thumbs pointing up throughout. Works the brachialis which makes arms look thicker.",
-    tips: ["Neutral wrist throughout (don't rotate)", "Slow on the way down", "Great for that 'thick arm' look from the side"]
+    sets:"3×12–15",
+    imgs:["Hammer_Curls/0.jpg","Hammer_Curls/1.jpg"],
+    desc:"Hold weights thumbs-up like gripping a hammer. Curl while keeping thumbs pointing up throughout. Works the brachialis muscle — makes arms look thicker.",
+    tips:["Keep the wrist neutral — don't rotate","Slow on the way down (2 sec)","Best exercise for thick-arm look from the side"]
   },
   "Push-ups": {
-    sets: "4 sets",
-    gif: "https://media.giphy.com/media/3oEjHFOscgNwdSRRDy/giphy.gif",
-    desc: "Hands slightly wider than shoulder-width, body in a straight line from head to heels. Lower chest to just above floor, then push up. The king of pushing exercises.",
-    tips: ["Don't let hips sag or stick up", "Look slightly forward, not straight down", "Full range — chest nearly touches floor"]
+    sets:"4 sets",
+    imgs:["Push-Up_Wide/0.jpg","Push-Up_Wide/1.jpg"],
+    desc:"Hands slightly wider than shoulder-width, body in a straight line. Lower chest to just above floor, then push up. The fundamental upper body push.",
+    tips:["Don't let hips sag or pike up","Full range — chest nearly touches the floor","Core stays braced throughout"]
   },
   "Decline push-ups": {
-    sets: "3 sets",
-    gif: "https://media.giphy.com/media/l0HlBO7eyXzSZkJri/giphy.gif",
-    desc: "Feet elevated on a chair or bed, hands on floor. Push up with your body angled downward. Targets upper chest and anterior deltoids more than flat push-ups.",
-    tips: ["Higher feet = more upper chest activation", "Keep core tight", "Hands shoulder-width or wider"]
+    sets:"3 sets",
+    imgs:["Decline_Push-Up/0.jpg","Decline_Push-Up/1.jpg"],
+    desc:"Feet elevated on a chair, hands on the floor. Your body angles downward. Shifts load to upper chest and front deltoids more than flat push-ups.",
+    tips:["Higher the feet = more upper chest","Keep core tight and body straight","Hands shoulder-width or slightly wider"]
   },
   "Diamond push-ups": {
-    sets: "3 sets",
-    gif: "https://media.giphy.com/media/xT9IgH8SSMBHhSgkZO/giphy.gif",
-    desc: "Form a diamond shape with index fingers and thumbs touching on the floor. Lower your chest to your hands. Isolates the triceps hard — your arms will grow from this.",
-    tips: ["Elbows point backward, not out to the sides", "Can be tough at first — start on knees if needed", "Best bodyweight tricep exercise"]
+    sets:"3 sets",
+    imgs:["Push-Ups_-_Close_Triceps_Position/0.jpg","Push-Ups_-_Close_Triceps_Position/1.jpg"],
+    desc:"Hands form a diamond/triangle on the floor under your chest. Lower down and push up. Heavily isolates the triceps — a major sleeve-filler.",
+    tips:["Elbows point backward, not out to the sides","Start on knees if it's too hard at first","The best bodyweight tricep exercise"]
   },
   "Pike push-ups": {
-    sets: "4 sets",
-    gif: "https://media.giphy.com/media/26BRBKqUiq586bRVm/giphy.gif",
-    desc: "Start in a downward dog position (hips high, body forms an inverted V). Bend your elbows to lower your head toward the floor between your hands, then push back up. Builds shoulder caps (deltoids).",
-    tips: ["Hips stay high the entire movement", "Elbows track slightly backward", "This is what makes shoulders wide"]
+    sets:"4 sets",
+    imgs:["Hanging_Pike/0.jpg","Hanging_Pike/1.jpg"],
+    desc:"Hips high forming an inverted V. Lower your head between your hands by bending elbows, then push back up. Directly builds the shoulder caps (deltoids) that make your frame wider.",
+    tips:["Hips stay high the entire movement","Elbows track slightly backward, not flared","This is the exercise that makes shoulders wide"]
   },
   "Chair dips": {
-    sets: "3 sets",
-    gif: "https://media.giphy.com/media/KyGiMJokZEQvu/giphy.gif",
-    desc: "Hands on edge of a chair behind you, legs straight or bent in front. Lower your body by bending elbows until upper arms are roughly parallel to floor, then push up.",
-    tips: ["Keep back close to the chair", "Don't go too deep to protect shoulders", "Feet further out = harder"]
+    sets:"3 sets",
+    imgs:["Bench_Dips/0.jpg","Bench_Dips/1.jpg"],
+    desc:"Hands on the edge of a chair behind you, legs out in front. Bend elbows to lower your body, then push back up. Great tricep and shoulder builder.",
+    tips:["Keep your back close to the chair","Don't dip too deep — protect the shoulder","Feet further forward = harder exercise"]
   },
   "Dips": {
-    sets: "4 sets",
-    gif: "https://media.giphy.com/media/QvBoMEcQ7DQXK/giphy.gif",
-    desc: "Between two chairs or parallel bars, support your full bodyweight on your hands. Lower until elbows are at 90°, then push up. Harder version of chair dips — full body suspended.",
-    tips: ["Slight forward lean hits chest more", "Upright = more triceps", "Go slow on the way down"]
+    sets:"4 sets",
+    imgs:["Parallel_Bar_Dip/0.jpg","Parallel_Bar_Dip/1.jpg"],
+    desc:"Support full bodyweight on two chairs or parallel bars. Lower until elbows reach 90°, then press back up. Full-body suspended — much harder than bench dips.",
+    tips:["Slight forward lean = more chest engagement","Staying upright = more triceps","Slow and controlled on the way down"]
   },
   "Elevated pike push-ups": {
-    sets: "3 sets",
-    gif: "https://media.giphy.com/media/l3q2K5jinAlChoCLS/giphy.gif",
-    desc: "Same as pike push-ups but feet are elevated on a chair or bed. The more elevation, the more it resembles a handstand push-up. Significantly more shoulder load.",
-    tips: ["Start lower elevation and work up", "Core must be tight", "This directly builds handstand push-up strength"]
+    sets:"3 sets",
+    imgs:["Push-Ups_With_Feet_Elevated/0.jpg","Push-Ups_With_Feet_Elevated/1.jpg"],
+    desc:"Feet on a chair, hips high. Same movement as pike push-ups but much more shoulder load. Approaches a handstand push-up as feet get higher.",
+    tips:["Start with lower elevation and work up","Core absolutely must be tight","Directly builds strength for handstand push-ups"]
   },
   "Squats": {
-    sets: "4 × 20",
-    gif: "https://media.giphy.com/media/xT9IgH8SSMBHhSgkZO/giphy.gif",
-    desc: "Feet shoulder-width apart, toes slightly out. Push hips back and down until thighs are at least parallel to floor. Drive through heels to stand. Foundation of lower body power.",
-    tips: ["Chest stays up, don't lean too far forward", "Knees track over toes", "For 20 reps, control the pace — don't rush"]
+    sets:"4×20",
+    imgs:["Bodyweight_Squat/0.jpg","Bodyweight_Squat/1.jpg"],
+    desc:"Feet shoulder-width apart, toes slightly out. Push hips back and down until thighs are parallel to the floor, then drive through heels to stand.",
+    tips:["Chest stays up — don't fold forward","Knees track in line with toes","At 20 reps, control the pace — don't rush"]
   },
   "Jump squats": {
-    sets: "3 × 15",
-    gif: "https://media.giphy.com/media/l0HlBO7eyXzSZkJri/giphy.gif",
-    desc: "Do a regular squat then explode upward, leaving the ground. Land softly by bending knees. Builds explosive power — crucial for martial arts kicks and footwork.",
-    tips: ["Land quietly — absorb impact through legs", "Arms swing forward on the jump", "This trains fast-twitch muscle fibers"]
+    sets:"3×15",
+    imgs:["Freehand_Jump_Squat/0.jpg","Freehand_Jump_Squat/1.jpg"],
+    desc:"Squat down then explode upward, leaving the ground. Land softly by absorbing through bent knees. Builds explosive power — critical for martial arts footwork and kicks.",
+    tips:["Land quietly — heels last, absorb with knees","Arms swing forward as you jump","Trains fast-twitch fibers you need for combat"]
   },
   "Bulgarian split squats": {
-    sets: "3 × 12 each leg",
-    gif: "https://media.giphy.com/media/26BRBKqUiq586bRVm/giphy.gif",
-    desc: "Rear foot elevated on a chair behind you, front foot forward. Lower your back knee toward the floor, keeping front shin vertical. One of the best leg exercises with just bodyweight.",
-    tips: ["Front foot far enough forward that shin stays vertical", "Don't let front knee cave inward", "Expect soreness — hardest leg exercise here"]
+    sets:"3×12 each leg",
+    imgs:["Split_Squats/0.jpg","Split_Squats/1.jpg"],
+    desc:"Rear foot elevated on chair, front foot stepped forward. Lower your back knee toward the floor. One of the most effective single-leg exercises possible with just bodyweight.",
+    tips:["Front foot far enough forward that shin stays vertical","Don't let front knee cave inward","Expect serious soreness — this is the hardest leg move here"]
   },
   "Calf raises": {
-    sets: "4 × 20",
-    gif: "https://media.giphy.com/media/3oEjHFOscgNwdSRRDy/giphy.gif",
-    desc: "Stand on edge of a step (or flat ground), rise up onto tiptoes as high as possible, then lower slowly. Do single leg for more challenge. Calves matter for martial arts stance stability.",
-    tips: ["Full range — heels go below step level at bottom", "Slow on the way down (2–3 seconds)", "Single-leg version is much harder"]
+    sets:"4×20",
+    imgs:["Standing_Calf_Raises/0.jpg","Standing_Calf_Raises/1.jpg"],
+    desc:"Rise up onto tiptoes as high as possible, then lower down slowly. Do on the edge of a step for more range. Builds ankle stability important for martial arts stance.",
+    tips:["Full range of motion — heels go below step at the bottom","2–3 second lowering phase","Single-leg version is much harder when this gets easy"]
   },
   "Hanging knee raises": {
-    sets: "3 sets",
-    gif: "https://media.giphy.com/media/KyGiMJokZEQvu/giphy.gif",
-    desc: "Hang from the pull-up bar. Raise your knees toward your chest, pause, then lower controlled. Works the entire core — abs, hip flexors, obliques.",
-    tips: ["Don't swing — control the movement", "Straight leg raises if this gets too easy", "Tuck pelvis at the top for maximum ab contraction"]
+    sets:"3 sets",
+    imgs:["Hanging_Leg_Raise/0.jpg","Hanging_Leg_Raise/1.jpg"],
+    desc:"Hang from pull-up bar. Raise both knees toward your chest, pause, then lower controlled. Works the entire core — abs, hip flexors, and obliques together.",
+    tips:["Don't swing — slow and controlled","Progress to straight-leg raises over time","Tuck pelvis at the top for maximum ab contraction"]
   },
   "Plank": {
-    sets: "3 rounds",
-    gif: "https://media.giphy.com/media/QvBoMEcQ7DQXK/giphy.gif",
-    desc: "Forearms and toes on floor, body in a straight line. Hold. Builds anti-rotation core strength — exactly what you need for punching power and grappling stability.",
-    tips: ["Don't let hips sag or pike up", "Squeeze everything — glutes, abs, quads", "Start with 20–30 sec, work up to 60+"]
+    sets:"3 rounds",
+    imgs:["Plank/0.jpg","Plank/1.jpg"],
+    desc:"Forearms and toes on the floor, body in a perfectly straight line. Hold. Builds anti-rotation core strength that directly powers your punches.",
+    tips:["Don't let hips sag or pike up","Squeeze glutes, abs, and quads simultaneously","Start at 20–30 sec; work up to 60+ seconds"]
   },
   "Forearm work": {
-    sets: "2 sets",
-    gif: "https://media.giphy.com/media/l3q2K5jinAlChoCLS/giphy.gif",
-    desc: "Wrist curls with your backpack: rest forearm on thigh, hold weight, curl wrist up. Also try wrist rotations and towel twists. Forearms matter a lot for grip in martial arts.",
-    tips: ["Both wrist flexion (curl up) and extension (curl down)", "Slow controlled reps", "Grip strength = better clinch work"]
+    sets:"2 sets",
+    imgs:["Kneeling_Forearm_Stretch/0.jpg"],
+    desc:"Rest forearm on your thigh, hold backpack handle, curl wrist up then down. Also do wrist rotations with a light weight. Grip strength = better clinch and grappling.",
+    tips:["Work both wrist flexion AND extension","Slow controlled reps — not speed","Your forearms will respond fast to this kind of direct work"]
   },
   "Stretching + mobility": {
-    sets: "15–20 min",
-    gif: "https://media.giphy.com/media/xT9IgH8SSMBHhSgkZO/giphy.gif",
-    desc: "Full body stretch: shoulders, chest, hips, hamstrings, wrists. Shoulder circles, hip circles, wrist rotations. Light movements to keep joints healthy.",
-    tips: ["Hold static stretches 30+ seconds", "Breathe into tight spots", "Recovery days are not optional — this is where gains happen"]
+    sets:"15–20 min",
+    imgs:["Incline_Push-Up/0.jpg"],
+    desc:"Shoulder circles, hip circles, wrist rotations, hamstring stretches. Light movements to keep all joints healthy under the training volume.",
+    tips:["Hold each stretch for 30+ seconds","Breathe into tight areas","This is training — not optional recovery fluff"]
   },
   "Walking + mobility": {
-    sets: "Sunday only",
-    gif: "https://media.giphy.com/media/l0HlBO7eyXzSZkJri/giphy.gif",
-    desc: "20–30 min easy walk + full body mobility routine. Increase blood flow to help muscle repair. No intensity, no challenge — pure recovery.",
-    tips: ["No guilt for doing nothing hard today", "This is part of the training plan, not a rest from it", "Good sleep tonight = better Monday session"]
+    sets:"Sunday",
+    imgs:["Incline_Push-Up/0.jpg"],
+    desc:"20–30 min easy walk plus full-body mobility. Increases blood flow to help muscle repair. No intensity today — pure restoration.",
+    tips:["No guilt for doing nothing hard today","Good sleep tonight = better Monday","This is part of the program, not a break from it"]
   }
 };
 
 const days = {
-  mon: ["Dead hang","Scapular pull-ups","Assisted/negative pull-ups","Australian rows","Chin-up attempts","Backpack curls","Hammer curls"],
-  tue: ["Push-ups","Decline push-ups","Diamond push-ups","Pike push-ups","Chair dips"],
-  wed: ["Stretching + mobility"],
-  thu: ["Assisted/negative pull-ups","Chin-up attempts","Australian rows","Backpack curls","Hammer curls","Forearm work"],
-  fri: ["Push-ups","Pike push-ups","Diamond push-ups","Dips","Elevated pike push-ups"],
-  sat: ["Squats","Jump squats","Bulgarian split squats","Calf raises","Hanging knee raises","Plank"],
-  sun: ["Walking + mobility"]
+  mon:["Dead hang","Scapular pull-ups","Assisted/negative pull-ups","Australian rows","Chin-up attempts","Backpack curls","Hammer curls"],
+  tue:["Push-ups","Decline push-ups","Diamond push-ups","Pike push-ups","Chair dips"],
+  wed:["Stretching + mobility"],
+  thu:["Assisted/negative pull-ups","Chin-up attempts","Australian rows","Backpack curls","Hammer curls","Forearm work"],
+  fri:["Push-ups","Pike push-ups","Diamond push-ups","Dips","Elevated pike push-ups"],
+  sat:["Squats","Jump squats","Bulgarian split squats","Calf raises","Hanging knee raises","Plank"],
+  sun:["Walking + mobility"]
 };
 
-function buildList(dayKey) {
-  const list = document.getElementById('list-'+dayKey);
-  if (!list || list.children.length > 0) return;
-  (days[dayKey]||[]).forEach(name => {
-    const ex = exercises[name] || {};
-    const card = document.createElement('div');
-    card.className = 'exercise-card';
-    card.innerHTML = `
-      <div class="ex-top" onclick="toggleEx(this.parentElement)">
-        <span class="ex-name">${name}</span>
-        <span style="display:flex;align-items:center;gap:8px">
-          <span class="ex-sets">${ex.sets||''}</span>
-          <i class="ti ti-chevron-down ex-chevron" aria-hidden="true"></i>
+function buildList(dayKey){
+  const el = document.getElementById('l-'+dayKey);
+  if(!el || el.children.length) return;
+  (days[dayKey]||[]).forEach(name=>{
+    const d = DB[name]||{};
+    const imgs = (d.imgs||[]).map(p=>BASE+'/'+p);
+    const div = document.createElement('div');
+    div.className='ex';
+    div.innerHTML=`
+      <div class="ex-head" onclick="tog(this.parentElement)">
+        <span class="ex-title">${name}</span>
+        <span style="display:flex;align-items:center">
+          <span class="ex-sets">${d.sets||''}</span>
+          <i class="ti ti-chevron-down chevron" aria-hidden="true"></i>
         </span>
       </div>
-      <div class="ex-detail">
-        <div class="ex-gif"><img src="${ex.gif||''}" alt="${name} demonstration" loading="lazy" onerror="this.parentElement.innerHTML='<span style=\\'font-size:12px;color:var(--color-text-secondary);padding:1rem\\'>Visual coming soon</span>'"></div>
-        <p class="ex-desc">${ex.desc||''}</p>
-        ${ex.tips?`<ul class="ex-tips">${ex.tips.map(t=>`<li>${t}</li>`).join('')}</ul>`:''}
+      <div class="ex-body">
+        <div class="img-col">
+          <div class="img-wrap" id="iw-${CSS.escape(name)}">
+            ${imgs.length ? `<img src="${imgs[0]}" alt="${name}" onerror="this.src=''" loading="lazy">` : '<span class="loading-img">Image loading…</span>'}
+          </div>
+          ${imgs.length>1?`<div class="img-nav">${imgs.map((u,i)=>`<button class="img-dot ${i===0?'on':''}" onclick="swImg('${CSS.escape(name)}',${i},${imgs.length},event)" title="View ${i===1?'end':'start'} position"></button>`).join('')}</div>`:''}
+        </div>
+        <div class="info-col">
+          <p class="ex-desc">${d.desc||''}</p>
+          <ul class="tips">${(d.tips||[]).map(t=>`<li>${t}</li>`).join('')}</ul>
+        </div>
       </div>`;
-    list.appendChild(card);
+    el.appendChild(div);
   });
 }
 
-function toggleEx(card) {
-  card.classList.toggle('open');
+function swImg(name, idx, total, evt){
+  evt.stopPropagation();
+  const d = DB[Object.keys(DB).find(k=>CSS.escape(k)===name)||'']||{};
+  const imgs = (d.imgs||[]).map(p=>BASE+'/'+p);
+  const wrap = document.getElementById('iw-'+name);
+  if(wrap) wrap.querySelector('img').src = imgs[idx];
+  wrap.closest('.ex-body').querySelectorAll('.img-dot').forEach((dot,i)=>dot.classList.toggle('on',i===idx));
 }
 
-function showDay(key) {
-  document.querySelectorAll('.day-panel').forEach(p=>p.classList.remove('active'));
-  document.querySelectorAll('.day-tab').forEach(t=>t.classList.remove('active'));
-  document.getElementById('day-'+key).classList.add('active');
-  document.querySelectorAll('.day-tab').forEach(t=>{
-    if(t.getAttribute('onclick').includes("'"+key+"'")) t.classList.add('active');
-  });
+function tog(card){ card.classList.toggle('open'); }
+
+function show(key,tab){
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('on'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));
+  document.getElementById('p-'+key).classList.add('on');
+  tab.classList.add('on');
   buildList(key);
 }
 
 buildList('mon');
 </script>
 
-
-  </body>
+</body>
 </html>
